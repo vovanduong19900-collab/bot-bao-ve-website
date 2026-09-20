@@ -1,108 +1,210 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bot Bảo Vệ Discord</title>
-  <meta name="description" content="Website chính thức của Bot Bảo Vệ Discord – Chính sách, Nội quy và Thông tin.">
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
-      line-height: 1.6;
-    }
-    header {
-      padding: 70px 20px;
-      text-align: center;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
-    }
-    header h1 { margin: 0 0 10px; font-size: 2.2rem; }
-    header p { margin: 0; font-size: 1rem; }
-    main {
-      width: min(1000px, 92%);
-      margin: 35px auto;
-      display: grid;
-      gap: 20px;
-    }
-    section {
-      background: #1e293b;
-      padding: 25px;
-      border-radius: 16px;
-      border: 1px solid #334155;
-    }
-    h2 { color: #93c5fd; margin-top: 0; }
-    .tag {
-      display: inline-block;
-      padding: 7px 12px;
-      margin: 4px;
-      border-radius: 999px;
-      background: #334155;
-      font-size: .9rem;
-    }
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #94a3b8;
-      font-size: .9rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Bảo Vệ - Điều Khoản & Chính Sách Bảo Mật</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-effect {
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.2);
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>🛡️ Bot Bảo Vệ Discord</h1>
-    <p>Website chính thức • Official Website</p>
-  </header>
+<body class="min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
 
-  <main>
-    <section>
-      <h2>🇻🇳 Giới thiệu</h2>
-      <p>
-        Chào mừng bạn đến với website chính thức của Bot Bảo Vệ Discord.
-        Bot được xây dựng để hỗ trợ quản lý, bảo vệ và tạo trải nghiệm vui vẻ cho máy chủ.
-      </p>
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-blue-500/30">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <span class="text-xl font-extrabold tracking-wide text-white">BOT BẢO VỆ</span>
+            </div>
+            <nav class="hidden md:flex space-x-8 font-medium">
+                <a href="#hero" class="hover:text-blue-400 transition">Trang chủ</a>
+                <a href="#tos" class="hover:text-blue-400 transition">Điều Khoản Dịch Vụ</a>
+                <a href="#privacy" class="hover:text-blue-400 transition">Chính Sách Bảo Mật</a>
+            </nav>
+            <div>
+                <a href="https://discord.com" target="_blank" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/30 transition duration-200 flex items-center gap-2">
+                    <i class="fa-brands fa-discord"></i> Thêm Vào Discord
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative py-20 px-4 text-center overflow-hidden">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <span class="px-4 py-1.5 rounded-full text-sm font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 inline-block mb-6">
+                🛡️ Giải pháp an ninh tối ưu cho Server Discord
+            </span>
+            <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
+                Bảo vệ máy chủ của bạn với <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Bot Bảo Vệ</span>
+            </h1>
+            <p class="text-slate-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+                Hệ thống chống Spam, chống Raids, lọc liên kết độc hại và quản lý kỷ luật tự động hóa 24/7. An toàn, tin cậy và minh bạch.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#tos" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium rounded-xl border border-slate-700 transition">
+                    Đọc Điều Khoản (ToS)
+                </a>
+                <a href="#privacy" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium rounded-xl border border-slate-700 transition">
+                    Xem Chính Sách Bảo Mật
+                </a>
+            </div>
+        </div>
     </section>
 
-    <section>
-      <h2>🇬🇧 About</h2>
-      <p>
-        Welcome to the official website of Discord Protection Bot.
-        The bot is designed to support server management, protection, and fun community experiences.
-      </p>
-    </section>
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-5xl mx-auto px-4 py-12 space-y-16">
 
-    <section>
-      <h2>📜 Nội quy / Rules</h2>
-      <p>• Tôn trọng mọi thành viên / Respect all members.</p>
-      <p>• Không spam hoặc phá hoại / No spam or disruption.</p>
-      <p>• Tuân thủ nội quy máy chủ / Follow the server rules.</p>
-    </section>
+        <!-- TERMS OF SERVICE (ĐIỀU KHOẢN DỊCH VỤ) -->
+        <section id="tos" class="glass-panel p-8 md:p-12 rounded-3xl glow-effect">
+            <div class="flex items-center gap-4 mb-8 border-b border-slate-800 pb-6">
+                <div class="p-3 bg-blue-500/10 text-blue-400 rounded-2xl text-2xl">
+                    <i class="fa-solid fa-file-contract"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white">Điều Khoản Dịch Vụ (Terms of Service)</h2>
+                    <p class="text-sm text-slate-400">Cập nhật lần cuối: 20/09/2026</p>
+                </div>
+            </div>
 
-    <section>
-      <h2>🔐 Chính sách / Policies</h2>
-      <p>
-        Không chia sẻ thông tin cá nhân của thành viên.
-        Các tính năng của bot chỉ được sử dụng nhằm hỗ trợ quản lý và bảo vệ máy chủ.
-      </p>
-      <p>
-        Do not share members' personal information.
-        Bot features are intended to support server management and protection.
-      </p>
-    </section>
+            <div class="space-y-8 text-slate-300 leading-relaxed">
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+                        <span class="text-blue-400">1.</span> Chấp Nhận Điều Khoản
+                    </h3>
+                    <p class="text-slate-400">
+                        Bằng việc thêm **Bot Bảo Vệ** vào máy chủ Discord của bạn, truy cập trang web này hoặc tương tác với bất kỳ tính năng nào của Bot, bạn đồng ý chịu sự ràng buộc bởi các Điều khoản Dịch vụ này, tất cả các luật và quy định hiện hành. Nếu bạn không đồng ý với bất kỳ điều khoản nào trong số này, bạn bị cấm sử dụng hoặc truy cập vào Bot Bảo Vệ.
+                    </p>
+                </div>
 
-    <section>
-      <h2>⚙️ Tính năng / Features</h2>
-      <span class="tag">Moderation</span>
-      <span class="tag">Protection</span>
-      <span class="tag">Fun</span>
-      <span class="tag">Community</span>
-    </section>
-  </main>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+                        <span class="text-blue-400">2.</span> Quyền Hạn Và Phạm Vi Sử Dụng
+                    </h3>
+                    <p class="text-slate-400 mb-3">
+                        **Bot Bảo Vệ** được cung cấp cho mục đích hỗ trợ quản trị viên bảo vệ và duy trì trật tự trong máy chủ Discord. Bạn đồng ý không lợi dụng dịch vụ để:
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 text-slate-400 pl-4">
+                        <li>Thực hiện các cuộc tấn công Từ chối Dịch vụ (DDoS) hoặc spam lệnh làm quá tải hệ thống.</li>
+                        <li>Khai thác các lỗ hổng kỹ thuật (exploits) nhằm mục đích phá hoại hoặc trục lợi.</li>
+                        <li>Sử dụng Bot vào các hoạt động vi phạm Điều khoản Dịch vụ của Discord Inc.</li>
+                        <li>Giả mạo các thông báo an toàn hoặc cảnh báo hệ thống từ Bot Bảo Vệ.</li>
+                    </ul>
+                </div>
 
-  <footer>
-    © 2026 Bot Bảo Vệ Discord • All rights reserved.
-  </footer>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+                        <span class="text-blue-400">3.</span> Quyền Giám Sát Và Tạm Ngừng Dịch Vụ
+                    </h3>
+                    <p class="text-slate-400">
+                        Chúng tôi có quyền đơn phương chấm dứt hoặc tạm ngưng quyền truy cập của bất kỳ máy chủ hoặc người dùng nào đối với **Bot Bảo Vệ** mà không cần báo trước nếu phát hiện hành vi vi phạm nghiêm trọng các điều khoản an toàn hoặc gây nguy hại đến cộng đồng người dùng khác.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+                        <span class="text-blue-400">4.</span> Tuyên Bố Miễn Trừ Tách Nhiệm
+                    </h3>
+                    <p class="text-slate-400">
+                        **Bot Bảo Vệ** được cung cấp theo nguyên tắc "nguyên trạng" (As-Is). Đội ngũ phát triển không đảm bảo rằng dịch vụ sẽ luôn hoạt động liên tục, không có lỗi hoặc hoàn toàn miễn nhiễm với mọi cuộc tấn công mạng. Chúng tôi không chịu trách nhiệm cho bất kỳ tổn thất dữ liệu, mất mát quyền kiểm soát máy chủ hoặc rủi ro nào phát sinh từ việc cấu hình sai lệnh từ phía quản trị viên.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRIVACY POLICY (CHÍNH SÁCH BẢO MẬT) -->
+        <section id="privacy" class="glass-panel p-8 md:p-12 rounded-3xl glow-effect">
+            <div class="flex items-center gap-4 mb-8 border-b border-slate-800 pb-6">
+                <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-2xl text-2xl">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white">Chính Sách Bảo Mật (Privacy Policy)</h2>
+                    <p class="text-sm text-slate-400">Cập nhật lần cuối: 20/09/2026</p>
+                </div>
+            </div>
+
+            <div class="space-y-8 text-slate-300 leading-relaxed">
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+                        <span class="text-emerald-400">1.</span> Dữ Liệu Chúng Tôi Thu Thập
+                    </h3>
+                    <p class="text-slate-400 mb-3">
+                        Để thực hiện chức năng bảo vệ máy chủ một cách hiệu quả, **Bot Bảo Vệ** chỉ thu thập và lưu trữ các thông tin kỹ thuật cần thiết tối thiểu, bao gồm:
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 my-4">
+                        <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                            <h4 class="font-semibold text-white mb-1"><i class="fa-solid fa-id-card text-emerald-400 mr-2"></i>Mã Nhận Dạng (IDs)</h4>
+                            <p class="text-xs text-slate-400">Discord User ID, Server Guild ID, Channel ID và Role ID nhằm phân quyền và ghi nhận cấu hình.</p>
+                        </div>
+                        <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                            <h4 class="font-semibold text-white mb-1"><i class="fa-solid fa-clock-rotate-left text-emerald-400 mr-2"></i>Nhật Ký Vi Phạm (Audit Logs)</h4>
+                            <p class="text-xs text-slate-400">Lịch sử cảnh cáo (Warnings), thời gian bị Mute, Kick, Ban để phục vụ tính năng quản lý kỷ luật.</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-amber-400/90 italic">
+                        *Lưu ý: Bot Bảo Vệ **KHÔNG** lưu trữ nội dung tin nhắn văn bản của bạn vào Cơ sở dữ liệu vĩnh viễn. Nội dung tin nhắn chỉ được quét trực tiếp qua bộ nhớ tạm (RAM) trong thời gian thực để phát hiện liên kết lừa đảo (phishing) và chống spam.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+                        <span class="text-emerald-400">2.</span> Mục Đích Sử Dụng Dữ Liệu
+                    </h3>
+                    <p class="text-slate-400">
+                        Dữ liệu được thu thập chỉ được dùng duy nhất cho việc duy trì hoạt động của Bot Bảo Vệ, bao gồm: tự động hóa việc chặn link độc, ngăn chặn Bot spam, xử lý thành viên vi phạm quy định máy chủ và phân tích thuật toán nhận diện tài khoản ảo.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+                        <span class="text-emerald-400">3.</span> Chia Sẻ Dữ Liệu Với Bên Thứ Ba
+                    </h3>
+                    <p class="text-slate-400">
+                        Chúng tôi cam kết **KHÔNG BAN NÓI, TRAO ĐỔI HOẶC CHIA SẺ** bất kỳ dữ liệu thu thập nào cho các bên thứ ba vì mục đích thương mại hay quảng cáo. Dữ liệu chỉ có thể được cung cấp khi có yêu cầu chính thức bằng văn bản từ cơ quan pháp luật có thẩm quyền hoặc quy định bắt buộc từ Discord Inc.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+                        <span class="text-emerald-400">4.</span> Lưu Trữ Và Xóa Dữ Liệu (Data Retention & Deletion)
+                    </h3>
+                    <p class="text-slate-400">
+                        • **Tự động xóa:** Khi **Bot Bảo Vệ** bị xóa (Kick) khỏi máy chủ của bạn, toàn bộ dữ liệu cấu hình liên quan đến máy chủ đó sẽ tự động bị dọn dẹp khỏi cơ sở dữ liệu sau 30 ngày.<br>
+                        • **Yêu cầu xóa thủ công:** Người dùng có quyền gửi yêu cầu xóa toàn bộ thông tin ID và nhật ký liên quan đến tài khoản cá nhân bằng cách liên hệ với đội ngũ hỗ trợ qua kênh Discord chính thức.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 mt-20">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
+            <p class="mb-2">© 2026 <strong>Bot Bảo Vệ</strong>. Tất cả các quyền được bảo lưu.</p>
+            <p>Trang web không liên kết trực tiếp hoặc được xác nhận bởi Discord Inc.</p>
+        </div>
+    </footer>
+
 </body>
 </html>
