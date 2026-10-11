@@ -12,7 +12,7 @@ body {
   font-family: 'Segoe UI', Tahoma, sans-serif;
   background: #0a0e1a;
   color: #e6edf3;
-  line-height: 1.6;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 a { color: #ff4757; text-decoration: none; transition: 0.3s; }
@@ -21,18 +21,20 @@ a:hover { color: #ff6b7a; }
 /* ===== NAVBAR ===== */
 nav {
   position: fixed; top: 0; width: 100%;
-  background: rgba(10, 14, 26, 0.85);
+  background: rgba(10, 14, 26, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 71, 87, 0.2);
-  z-index: 999; padding: 15px 0;
+  z-index: 999; padding: 14px 0;
 }
 .nav-container {
   max-width: 1200px; margin: 0 auto; padding: 0 20px;
   display: flex; justify-content: space-between; align-items: center;
+  gap: 16px;
 }
 .logo {
   display: flex; align-items: center; gap: 10px;
-  font-size: 20px; font-weight: 700; color: #fff;
+  font-size: 18px; font-weight: 700; color: #fff;
+  flex-shrink: 0;
 }
 .logo-icon {
   width: 36px; height: 36px; border-radius: 10px;
@@ -40,28 +42,20 @@ nav {
   display: flex; align-items: center; justify-content: center;
   font-size: 20px; box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
 }
-.nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+.nav-links { display: flex; gap: 22px; list-style: none; align-items: center; }
 .nav-links a {
-  color: #b0b8c4; font-size: 14px; font-weight: 500;
+  color: #b0b8c4; font-size: 13.5px; font-weight: 500;
   position: relative; padding: 6px 0;
 }
 .nav-links a:hover { color: #ff4757; }
-.nav-links a::after {
-  content: ''; position: absolute; bottom: 0; left: 0;
-  width: 0; height: 2px; background: #ff4757; transition: 0.3s;
-}
-.nav-links a:hover::after { width: 100%; }
 .nav-invite {
-  background: linear-gradient(135deg, #ff4757, #c0392b);
-  color: #fff !important; padding: 10px 20px !important;
+  background: linear-gradient(135deg, #5865f2, #4752c4);
+  color: #fff !important; padding: 8px 16px !important;
   border-radius: 10px; font-weight: 600 !important;
-  box-shadow: 0 4px 16px rgba(255, 71, 87, 0.3);
+  font-size: 13px !important; white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(88, 101, 242, 0.3);
 }
-.nav-invite:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255, 71, 87, 0.5);
-}
-.nav-invite::after { display: none; }
+.nav-invite:hover { transform: translateY(-2px); color: #fff !important; }
 
 /* ===== HERO ===== */
 .hero {
@@ -90,14 +84,14 @@ nav {
   50% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); }
 }
 .hero h1 {
-  font-size: clamp(36px, 6vw, 64px); font-weight: 800;
+  font-size: clamp(36px, 6vw, 62px); font-weight: 800;
   line-height: 1.1; margin-bottom: 20px;
   background: linear-gradient(135deg, #fff 30%, #ff4757);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .hero p {
-  font-size: 18px; color: #b0b8c4; margin-bottom: 36px;
+  font-size: 17px; color: #b0b8c4; margin-bottom: 36px;
   max-width: 600px; margin-left: auto; margin-right: auto;
 }
 .hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
@@ -105,76 +99,46 @@ nav {
   padding: 14px 28px; border-radius: 12px; font-size: 15px;
   font-weight: 600; cursor: pointer; transition: 0.3s;
   border: none; display: inline-flex; align-items: center; gap: 8px;
-  text-decoration: none;
 }
 .btn-primary {
   background: linear-gradient(135deg, #ff4757, #c0392b); color: #fff;
   box-shadow: 0 8px 24px rgba(255, 71, 87, 0.35);
 }
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(255, 71, 87, 0.5);
-  color: #fff;
-}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(255, 71, 87, 0.5); color: #fff; }
 .btn-secondary {
   background: rgba(255, 255, 255, 0.05); color: #e6edf3;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-3px);
-  color: #e6edf3;
-}
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-3px); color: #e6edf3; }
 .btn-invite {
   background: linear-gradient(135deg, #5865f2, #4752c4); color: #fff;
   box-shadow: 0 8px 24px rgba(88, 101, 242, 0.4);
-  padding: 16px 36px; font-size: 16px;
 }
-.btn-invite:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(88, 101, 242, 0.6);
-  color: #fff;
-}
+.btn-invite:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(88, 101, 242, 0.6); color: #fff; }
 .btn-invite svg { width: 20px; height: 20px; fill: currentColor; }
 
-/* ===== INVITE CTA SECTION ===== */
-.invite-cta {
-  padding: 60px 20px;
-  background: linear-gradient(135deg, rgba(88, 101, 242, 0.1), rgba(255, 71, 87, 0.1));
-  border-top: 1px solid rgba(255, 71, 87, 0.15);
-  border-bottom: 1px solid rgba(255, 71, 87, 0.15);
-  text-align: center;
-}
-.invite-cta h2 {
-  font-size: clamp(24px, 3.5vw, 36px); color: #fff;
-  margin-bottom: 12px; font-weight: 700;
-}
-.invite-cta p {
-  color: #b0b8c4; font-size: 16px; margin-bottom: 28px;
-  max-width: 600px; margin-left: auto; margin-right: auto;
-}
-
 /* ===== SECTIONS ===== */
-section { padding: 80px 20px; }
+section { padding: 80px 20px; scroll-margin-top: 80px; }
+section.alt { background: rgba(15, 20, 32, 0.4); }
 .container { max-width: 1200px; margin: 0 auto; }
-.section-title { text-align: center; margin-bottom: 60px; }
+.section-title { text-align: center; margin-bottom: 50px; }
 .section-title h2 {
-  font-size: clamp(28px, 4vw, 42px); font-weight: 700;
+  font-size: clamp(28px, 4vw, 40px); font-weight: 700;
   margin-bottom: 12px; color: #fff;
 }
 .section-title h2 span { color: #ff4757; }
-.section-title p { color: #8892a0; font-size: 16px; max-width: 600px; margin: 0 auto; }
+.section-title p { color: #8892a0; font-size: 15px; max-width: 600px; margin: 0 auto; }
 
 /* ===== FEATURES ===== */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
 }
 .feature-card {
   background: linear-gradient(145deg, rgba(26, 32, 46, 0.9), rgba(15, 20, 32, 0.9));
   border: 1px solid rgba(255, 71, 87, 0.15);
-  border-radius: 16px; padding: 24px;
+  border-radius: 14px; padding: 22px;
   transition: 0.3s; position: relative; overflow: hidden;
 }
 .feature-card::before {
@@ -189,15 +153,15 @@ section { padding: 80px 20px; }
 }
 .feature-card:hover::before { height: 100%; }
 .feature-num {
-  display: inline-block; font-size: 12px; font-weight: 700;
+  display: inline-block; font-size: 11px; font-weight: 700;
   color: #ff4757; background: rgba(255, 71, 87, 0.1);
-  padding: 4px 10px; border-radius: 8px; margin-bottom: 14px;
+  padding: 3px 9px; border-radius: 6px; margin-bottom: 12px;
 }
 .feature-card h3 {
-  font-size: 17px; color: #fff; margin-bottom: 8px;
+  font-size: 16px; color: #fff; margin-bottom: 6px;
   display: flex; align-items: center; gap: 8px;
 }
-.feature-card p { color: #8892a0; font-size: 14px; }
+.feature-card p { color: #8892a0; font-size: 13.5px; }
 
 /* ===== COMMANDS TABLE ===== */
 .commands-wrapper {
@@ -207,18 +171,16 @@ section { padding: 80px 20px; }
 }
 .commands-table {
   width: 100%; border-collapse: collapse; font-size: 14px;
-  min-width: 700px;
+  min-width: 750px;
 }
-.commands-table thead {
-  background: rgba(255, 71, 87, 0.1);
-}
+.commands-table thead { background: rgba(255, 71, 87, 0.1); }
 .commands-table th {
-  text-align: left; padding: 16px 20px;
-  color: #ff4757; font-weight: 600; font-size: 13px;
+  text-align: left; padding: 15px 18px;
+  color: #ff4757; font-weight: 600; font-size: 12.5px;
   text-transform: uppercase; letter-spacing: 0.5px;
 }
 .commands-table td {
-  padding: 14px 20px;
+  padding: 13px 18px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   color: #c4ccd8;
 }
@@ -226,14 +188,14 @@ section { padding: 80px 20px; }
 .commands-table code {
   background: rgba(255, 71, 87, 0.12);
   color: #ff6b7a; padding: 3px 8px; border-radius: 6px;
-  font-family: 'Consolas', monospace; font-size: 13px;
+  font-family: 'Consolas', monospace; font-size: 12.5px;
   white-space: nowrap;
 }
 .stt {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 26px; height: 26px; border-radius: 8px;
+  width: 25px; height: 25px; border-radius: 7px;
   background: rgba(255, 71, 87, 0.15); color: #ff4757;
-  font-weight: 700; font-size: 12px;
+  font-weight: 700; font-size: 11.5px;
 }
 
 /* ===== LEGAL ===== */
@@ -244,20 +206,45 @@ section { padding: 80px 20px; }
   border-radius: 20px; padding: 40px;
 }
 .legal-container h3 {
-  color: #ff4757; font-size: 20px; margin: 30px 0 12px;
+  color: #ff4757; font-size: 19px; margin: 30px 0 12px;
   padding-bottom: 8px; border-bottom: 1px solid rgba(255, 71, 87, 0.15);
+  display: flex; align-items: center; gap: 10px;
 }
-.legal-container h3:first-child { margin-top: 0; }
-.legal-container p { color: #b0b8c4; margin-bottom: 12px; font-size: 15px; }
-.legal-container ul { margin: 12px 0 16px 24px; color: #b0b8c4; }
-.legal-container li { margin-bottom: 8px; font-size: 15px; }
+.legal-container h3:first-of-type { margin-top: 0; }
+.legal-container h3 .num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 8px;
+  background: rgba(255, 71, 87, 0.15);
+  font-size: 13px; font-weight: 700; flex-shrink: 0;
+}
+.legal-container p { color: #b0b8c4; margin-bottom: 12px; font-size: 14.5px; }
+.legal-container ul { margin: 10px 0 14px 24px; color: #b0b8c4; }
+.legal-container li { margin-bottom: 8px; font-size: 14.5px; }
 .legal-container strong { color: #fff; }
-.legal-container .highlight {
+.highlight {
   background: rgba(255, 71, 87, 0.08);
   border-left: 3px solid #ff4757;
   padding: 14px 18px; border-radius: 8px; margin: 16px 0;
-  color: #c4ccd8;
+  color: #c4ccd8; font-size: 14.5px;
 }
+.highlight.warning {
+  background: rgba(255, 165, 0, 0.08);
+  border-left-color: #ffa500;
+}
+.highlight.success {
+  background: rgba(0, 255, 100, 0.08);
+  border-left-color: #00ff64;
+}
+
+/* ===== CTA MIDDLE ===== */
+.cta-box {
+  text-align: center; padding: 50px 30px;
+  background: linear-gradient(135deg, rgba(88, 101, 242, 0.12), rgba(255, 71, 87, 0.12));
+  border: 1px solid rgba(255, 71, 87, 0.2);
+  border-radius: 20px; margin-top: 40px;
+}
+.cta-box h3 { color: #fff; font-size: 24px; margin-bottom: 10px; }
+.cta-box p { color: #b0b8c4; margin-bottom: 24px; }
 
 /* ===== FOOTER ===== */
 footer {
@@ -266,23 +253,27 @@ footer {
   color: #8892a0; font-size: 14px;
 }
 footer .footer-links {
-  display: flex; gap: 24px; justify-content: center;
+  display: flex; gap: 22px; justify-content: center;
   margin-bottom: 20px; flex-wrap: wrap;
 }
-footer .footer-links a { color: #b0b8c4; }
+footer .footer-links a { color: #b0b8c4; font-size: 14px; }
 footer .footer-links a:hover { color: #ff4757; }
 
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
   .nav-links li:not(:last-child) { display: none; }
   .nav-links { gap: 10px; }
-  .nav-invite { padding: 8px 14px !important; font-size: 13px !important; }
+  .nav-invite { padding: 7px 12px !important; font-size: 12px !important; }
+  .logo span { display: none; }
   .hero h1 { font-size: 32px; }
-  .btn-invite { padding: 14px 24px; font-size: 15px; }
+  .hero p { font-size: 15px; }
+  .btn { padding: 12px 20px; font-size: 14px; }
   .commands-table { font-size: 13px; }
   .commands-table th, .commands-table td { padding: 10px 12px; }
-  .legal-container { padding: 24px; }
-  section { padding: 60px 16px; }
+  .legal-container { padding: 22px; }
+  section { padding: 55px 16px; }
+  .cta-box { padding: 32px 20px; }
+  .cta-box h3 { font-size: 20px; }
 }
 </style>
 </head>
@@ -291,10 +282,10 @@ footer .footer-links a:hover { color: #ff4757; }
 <!-- ============ NAVBAR ============ -->
 <nav>
   <div class="nav-container">
-    <div class="logo">
+    <a href="#top" class="logo">
       <div class="logo-icon">🛡️</div>
       <span>Anti-Nuke Bot</span>
-    </div>
+    </a>
     <ul class="nav-links">
       <li><a href="#features">Chức năng</a></li>
       <li><a href="#commands">Lệnh</a></li>
@@ -302,19 +293,17 @@ footer .footer-links a:hover { color: #ff4757; }
       <li><a href="#terms">Điều khoản</a></li>
       <li>
         <a href="https://discord.com/oauth2/authorize?client_id=1557731965686521997"
-           target="_blank" rel="noopener" class="nav-invite">
-          ➕ Mời Bot
-        </a>
+           target="_blank" rel="noopener" class="nav-invite">➕ Mời Bot</a>
       </li>
     </ul>
   </div>
 </nav>
 
 <!-- ============ HERO ============ -->
-<section class="hero">
+<section class="hero" id="top">
   <div class="hero-content">
     <div class="hero-badge">⚡ Hệ thống bảo vệ tự động 24/7</div>
-    <h1>Bảo vệ Server Discord của bạn<br>Khỏi mọi cuộc tấn công</h1>
+    <h1>Bảo vệ Server Discord<br>Khỏi mọi cuộc tấn công</h1>
     <p>Anti-Nuke Bot với 13 lá chắn tự động, phát hiện và ngăn chặn mọi hành vi phá hoại server trong tích tắc.</p>
     <div class="hero-buttons">
       <a href="https://discord.com/oauth2/authorize?client_id=1557731965686521997"
@@ -324,19 +313,6 @@ footer .footer-links a:hover { color: #ff4757; }
       </a>
       <a href="#features" class="btn btn-secondary">🚀 Khám phá chức năng</a>
     </div>
-  </div>
-</section>
-
-<!-- ============ INVITE CTA ============ -->
-<section class="invite-cta">
-  <div class="container">
-    <h2>🛡️ Sẵn sàng bảo vệ server của bạn?</h2>
-    <p>Chỉ mất 10 giây để thêm Anti-Nuke Bot vào server Discord của bạn. Hoàn toàn miễn phí!</p>
-    <a href="https://discord.com/oauth2/authorize?client_id=1557731965686521997"
-       target="_blank" rel="noopener" class="btn btn-invite">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-      Thêm vào Server
-    </a>
   </div>
 </section>
 
@@ -418,7 +394,7 @@ footer .footer-links a:hover { color: #ff4757; }
 </section>
 
 <!-- ============ COMMANDS ============ -->
-<section id="commands" style="background: rgba(15, 20, 32, 0.4);">
+<section id="commands" class="alt">
   <div class="container">
     <div class="section-title">
       <h2>Danh sách <span>Lệnh</span></h2>
@@ -453,4 +429,13 @@ footer .footer-links a:hover { color: #ff4757; }
           <tr><td><span class="stt">16</span></td><td>Verify off</td><td><code>!verified off</code></td><td>Tắt hệ thống xác minh</td></tr>
           <tr><td><span class="stt">17</span></td><td>Thêm blacklist</td><td><code>!addblacklist @user [lý do]</code></td><td>Thêm người/bot vào blacklist</td></tr>
           <tr><td><span class="stt">18</span></td><td>Xóa blacklist</td><td><code>!removeblacklist @user</code></td><td>Xóa khỏi blacklist</td></tr>
-          <tr><td><span class="stt">19</span></td><td>DS blacklist</td><td><code>!listblacklist
+          <tr><td><span class="stt">19</span></td><td>DS blacklist</td><td><code>!listblacklist</code></td><td>Xem danh sách blacklist</td></tr>
+          <tr><td><span class="stt">20</span></td><td>Cấp quyền</td><td><code>!capquyen @user &lt;cấp&gt;</code></td><td>Cấp role (quantri, dieuhanh, quanly, thunghiem)</td></tr>
+          <tr><td><span class="stt">21</span></td><td>Cấp quyền Bot</td><td><code>!botquyen add @user</code></td><td>Cấp quyền sử dụng Bot</td></tr>
+          <tr><td><span class="stt">22</span></td><td>Thu hồi quyền Bot</td><td><code>!botquyen remove @user</code></td><td>Thu hồi quyền Bot</td></tr>
+          <tr><td><span class="stt">23</span></td><td>DS quyền Bot</td><td><code>!botquyen list</code></td><td>Xem danh sách người có quyền Bot</td></tr>
+          <tr><td><span class="stt">24</span></td><td>Mời bot</td><td><code>!moibot &lt;tên server&gt;</code></td><td>Lấy link mời bot vào server khác</td></tr>
+          <tr><td><span class="stt">25</span></td><td>Rời server</td><td><code>!roibot &lt;tên server&gt;</code></td><td>Rời khỏi server</td></tr>
+          <tr><td><span class="stt">26</span></td><td>DS server</td><td><code>!danhsach</code></td><td>Xem danh sách server bot đang ở</td></tr>
+          <tr><td><span class="stt">27</span></td><td>Thông tin server</td><td><code>!sever &lt;tên/ID&gt;</code></td><td>Xem thông tin server</td></tr>
+          <tr><td><span class="stt">28</span></td><td>Thông b
