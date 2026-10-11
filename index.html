@@ -1,278 +1,456 @@
 <!DOCTYPE html>
-<html lang="vi" class="scroll-smooth">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bot Bảo Vệ - Điều Khoản Dịch Vụ & Chính Sách Bảo Mật Chi Tiết</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            background-color: #0b0f19;
-            color: #cbd5e1;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
-        .glass-panel {
-            background: rgba(17, 24, 39, 0.75);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .glow-effect {
-            box-shadow: 0 0 35px rgba(37, 99, 235, 0.15);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anti-Nuke Bot — Bảo vệ Server Discord</title>
+<meta name="description" content="Anti-Nuke Bot - Hệ thống bảo vệ server Discord với 13 lá chắn tự động">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: #0a0e1a;
+  color: #e6edf3;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: #ff4757; text-decoration: none; transition: 0.3s; }
+a:hover { color: #ff6b7a; }
+
+/* ===== NAVBAR ===== */
+nav {
+  position: fixed; top: 0; width: 100%;
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 71, 87, 0.2);
+  z-index: 999; padding: 15px 0;
+}
+.nav-container {
+  max-width: 1200px; margin: 0 auto; padding: 0 20px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 20px; font-weight: 700; color: #fff;
+}
+.logo-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, #ff4757, #c0392b);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+}
+.nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+.nav-links a {
+  color: #b0b8c4; font-size: 14px; font-weight: 500;
+  position: relative; padding: 6px 0;
+}
+.nav-links a:hover { color: #ff4757; }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px; background: #ff4757; transition: 0.3s;
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-invite {
+  background: linear-gradient(135deg, #ff4757, #c0392b);
+  color: #fff !important; padding: 10px 20px !important;
+  border-radius: 10px; font-weight: 600 !important;
+  box-shadow: 0 4px 16px rgba(255, 71, 87, 0.3);
+}
+.nav-invite:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 71, 87, 0.5);
+}
+.nav-invite::after { display: none; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 100px 20px 60px; text-align: center; position: relative;
+  background: radial-gradient(ellipse at top, rgba(255, 71, 87, 0.15), transparent 60%);
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 71, 87, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 71, 87, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse at center, black, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black, transparent 70%);
+}
+.hero-content { position: relative; z-index: 2; max-width: 800px; }
+.hero-badge {
+  display: inline-block; padding: 6px 16px; border-radius: 20px;
+  background: rgba(255, 71, 87, 0.1); border: 1px solid rgba(255, 71, 87, 0.3);
+  color: #ff4757; font-size: 13px; font-weight: 600;
+  margin-bottom: 24px; animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); }
+}
+.hero h1 {
+  font-size: clamp(36px, 6vw, 64px); font-weight: 800;
+  line-height: 1.1; margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff 30%, #ff4757);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero p {
+  font-size: 18px; color: #b0b8c4; margin-bottom: 36px;
+  max-width: 600px; margin-left: auto; margin-right: auto;
+}
+.hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  padding: 14px 28px; border-radius: 12px; font-size: 15px;
+  font-weight: 600; cursor: pointer; transition: 0.3s;
+  border: none; display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #ff4757, #c0392b); color: #fff;
+  box-shadow: 0 8px 24px rgba(255, 71, 87, 0.35);
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(255, 71, 87, 0.5);
+  color: #fff;
+}
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05); color: #e6edf3;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+  color: #e6edf3;
+}
+.btn-invite {
+  background: linear-gradient(135deg, #5865f2, #4752c4); color: #fff;
+  box-shadow: 0 8px 24px rgba(88, 101, 242, 0.4);
+  padding: 16px 36px; font-size: 16px;
+}
+.btn-invite:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(88, 101, 242, 0.6);
+  color: #fff;
+}
+.btn-invite svg { width: 20px; height: 20px; fill: currentColor; }
+
+/* ===== INVITE CTA SECTION ===== */
+.invite-cta {
+  padding: 60px 20px;
+  background: linear-gradient(135deg, rgba(88, 101, 242, 0.1), rgba(255, 71, 87, 0.1));
+  border-top: 1px solid rgba(255, 71, 87, 0.15);
+  border-bottom: 1px solid rgba(255, 71, 87, 0.15);
+  text-align: center;
+}
+.invite-cta h2 {
+  font-size: clamp(24px, 3.5vw, 36px); color: #fff;
+  margin-bottom: 12px; font-weight: 700;
+}
+.invite-cta p {
+  color: #b0b8c4; font-size: 16px; margin-bottom: 28px;
+  max-width: 600px; margin-left: auto; margin-right: auto;
+}
+
+/* ===== SECTIONS ===== */
+section { padding: 80px 20px; }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-title { text-align: center; margin-bottom: 60px; }
+.section-title h2 {
+  font-size: clamp(28px, 4vw, 42px); font-weight: 700;
+  margin-bottom: 12px; color: #fff;
+}
+.section-title h2 span { color: #ff4757; }
+.section-title p { color: #8892a0; font-size: 16px; max-width: 600px; margin: 0 auto; }
+
+/* ===== FEATURES ===== */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.feature-card {
+  background: linear-gradient(145deg, rgba(26, 32, 46, 0.9), rgba(15, 20, 32, 0.9));
+  border: 1px solid rgba(255, 71, 87, 0.15);
+  border-radius: 16px; padding: 24px;
+  transition: 0.3s; position: relative; overflow: hidden;
+}
+.feature-card::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 3px; height: 0; background: #ff4757;
+  transition: 0.4s;
+}
+.feature-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 71, 87, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+.feature-card:hover::before { height: 100%; }
+.feature-num {
+  display: inline-block; font-size: 12px; font-weight: 700;
+  color: #ff4757; background: rgba(255, 71, 87, 0.1);
+  padding: 4px 10px; border-radius: 8px; margin-bottom: 14px;
+}
+.feature-card h3 {
+  font-size: 17px; color: #fff; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+.feature-card p { color: #8892a0; font-size: 14px; }
+
+/* ===== COMMANDS TABLE ===== */
+.commands-wrapper {
+  background: rgba(15, 20, 32, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px; overflow-x: auto;
+}
+.commands-table {
+  width: 100%; border-collapse: collapse; font-size: 14px;
+  min-width: 700px;
+}
+.commands-table thead {
+  background: rgba(255, 71, 87, 0.1);
+}
+.commands-table th {
+  text-align: left; padding: 16px 20px;
+  color: #ff4757; font-weight: 600; font-size: 13px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.commands-table td {
+  padding: 14px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: #c4ccd8;
+}
+.commands-table tr:hover td { background: rgba(255, 71, 87, 0.04); }
+.commands-table code {
+  background: rgba(255, 71, 87, 0.12);
+  color: #ff6b7a; padding: 3px 8px; border-radius: 6px;
+  font-family: 'Consolas', monospace; font-size: 13px;
+  white-space: nowrap;
+}
+.stt {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 8px;
+  background: rgba(255, 71, 87, 0.15); color: #ff4757;
+  font-weight: 700; font-size: 12px;
+}
+
+/* ===== LEGAL ===== */
+.legal-container {
+  max-width: 900px; margin: 0 auto;
+  background: linear-gradient(145deg, rgba(26, 32, 46, 0.7), rgba(15, 20, 32, 0.7));
+  border: 1px solid rgba(255, 71, 87, 0.15);
+  border-radius: 20px; padding: 40px;
+}
+.legal-container h3 {
+  color: #ff4757; font-size: 20px; margin: 30px 0 12px;
+  padding-bottom: 8px; border-bottom: 1px solid rgba(255, 71, 87, 0.15);
+}
+.legal-container h3:first-child { margin-top: 0; }
+.legal-container p { color: #b0b8c4; margin-bottom: 12px; font-size: 15px; }
+.legal-container ul { margin: 12px 0 16px 24px; color: #b0b8c4; }
+.legal-container li { margin-bottom: 8px; font-size: 15px; }
+.legal-container strong { color: #fff; }
+.legal-container .highlight {
+  background: rgba(255, 71, 87, 0.08);
+  border-left: 3px solid #ff4757;
+  padding: 14px 18px; border-radius: 8px; margin: 16px 0;
+  color: #c4ccd8;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 40px 20px; text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  color: #8892a0; font-size: 14px;
+}
+footer .footer-links {
+  display: flex; gap: 24px; justify-content: center;
+  margin-bottom: 20px; flex-wrap: wrap;
+}
+footer .footer-links a { color: #b0b8c4; }
+footer .footer-links a:hover { color: #ff4757; }
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .nav-links li:not(:last-child) { display: none; }
+  .nav-links { gap: 10px; }
+  .nav-invite { padding: 8px 14px !important; font-size: 13px !important; }
+  .hero h1 { font-size: 32px; }
+  .btn-invite { padding: 14px 24px; font-size: 15px; }
+  .commands-table { font-size: 13px; }
+  .commands-table th, .commands-table td { padding: 10px 12px; }
+  .legal-container { padding: 24px; }
+  section { padding: 60px 16px; }
+}
+</style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+<body>
 
-    <!-- HEADER / NAVIGATION -->
-    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-11 h-11 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-blue-500/30">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-                <span class="text-xl font-extrabold tracking-wide text-white">BOT BẢO VỆ</span>
-            </div>
-            <nav class="hidden md:flex space-x-8 font-medium text-sm">
-                <a href="#hero" class="hover:text-blue-400 transition">Trang Chủ</a>
-                <a href="#tos" class="hover:text-blue-400 transition">Điều Khoản Dịch Vụ</a>
-                <a href="#privacy" class="hover:text-blue-400 transition">Chính Sách Bảo Mật</a>
-            </nav>
-            <div>
-                <a href="https://discord.com/oauth2/authorize?client_id=1537452928598671450" target="_blank" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-blue-600/30 transition duration-200 flex items-center gap-2">
-                    <i class="fa-brands fa-discord text-base"></i> Thêm Vào Discord
-                </a>
-            </div>
-        </div>
-    </header>
+<!-- ============ NAVBAR ============ -->
+<nav>
+  <div class="nav-container">
+    <div class="logo">
+      <div class="logo-icon">🛡️</div>
+      <span>Anti-Nuke Bot</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#features">Chức năng</a></li>
+      <li><a href="#commands">Lệnh</a></li>
+      <li><a href="#privacy">Bảo mật</a></li>
+      <li><a href="#terms">Điều khoản</a></li>
+      <li>
+        <a href="https://discord.com/oauth2/authorize?client_id=1557731965686521997"
+           target="_blank" rel="noopener" class="nav-invite">
+          ➕ Mời Bot
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-    <!-- HERO SECTION -->
-    <section id="hero" class="relative py-20 px-4 text-center overflow-hidden">
-        <div class="max-w-4xl mx-auto relative z-10">
-            <span class="px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 inline-block mb-6 tracking-wide">
-                🛡️ HỆ THỐNG BẢO MẬT & QUẢN TRỊ MÁY CHỦ DISCORD TỰ ĐỘNG
-            </span>
-            <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
-                Chính Sách & Điều Khoản Sử Dụng <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">Bot Bảo Vệ</span>
-            </h1>
-            <p class="text-slate-400 text-base md:text-lg mb-10 max-w-3xl mx-auto leading-relaxed">
-                Văn bản này quy định toàn bộ quyền hạn, nghĩa vụ, điều khoản dịch vụ và chính sách bảo vệ dữ liệu người dùng khi vận hành dịch vụ Bot Bảo Vệ trên nền tảng Discord.
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="https://discord.com/oauth2/authorize?client_id=1537452928598671450" target="_blank" class="px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm rounded-xl shadow-lg shadow-blue-600/30 transition duration-200 flex items-center gap-2">
-                    <i class="fa-brands fa-discord text-lg"></i> Mời Bot Vào Server Ngay
-                </a>
-                <a href="#tos" class="px-6 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-sm rounded-xl border border-slate-700 transition">
-                    Đọc Chi Tiết Điều Khoản
-                </a>
-            </div>
-        </div>
-    </section>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">⚡ Hệ thống bảo vệ tự động 24/7</div>
+    <h1>Bảo vệ Server Discord của bạn<br>Khỏi mọi cuộc tấn công</h1>
+    <p>Anti-Nuke Bot với 13 lá chắn tự động, phát hiện và ngăn chặn mọi hành vi phá hoại server trong tích tắc.</p>
+    <div class="hero-buttons">
+      <a href="https://discord.com/oauth2/authorize?client_id=1557731965686521997"
+         target="_blank" rel="noopener" class="btn btn-invite">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+        Mời Bot Ngay
+      </a>
+      <a href="#features" class="btn btn-secondary">🚀 Khám phá chức năng</a>
+    </div>
+  </div>
+</section>
 
-    <!-- MAIN CONTENT CONTAINER -->
-    <main class="max-w-5xl mx-auto px-4 py-12 space-y-16">
+<!-- ============ INVITE CTA ============ -->
+<section class="invite-cta">
+  <div class="container">
+    <h2>🛡️ Sẵn sàng bảo vệ server của bạn?</h2>
+    <p>Chỉ mất 10 giây để thêm Anti-Nuke Bot vào server Discord của bạn. Hoàn toàn miễn phí!</p>
+    <a href="https://discord.com/oauth2/authorize?client_id=1557731965686521997"
+       target="_blank" rel="noopener" class="btn btn-invite">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      Thêm vào Server
+    </a>
+  </div>
+</section>
 
-        <!-- TERMS OF SERVICE (ĐIỀU KHOẢN DỊCH VỤ DÀI CHI TIẾT) -->
-        <section id="tos" class="glass-panel p-8 md:p-12 rounded-3xl glow-effect">
-            <div class="flex items-center gap-4 mb-8 border-b border-slate-800 pb-6">
-                <div class="p-3.5 bg-blue-500/10 text-blue-400 rounded-2xl text-2xl">
-                    <i class="fa-solid fa-file-contract"></i>
-                </div>
-                <div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-white">Điều Khoản Dịch Vụ (Terms of Service)</h2>
-                    <p class="text-xs text-slate-400 mt-1">Phiên bản 2.4 | Cập nhật hiệu lực lần cuối: 20/09/2026</p>
-                </div>
-            </div>
+<!-- ============ FEATURES ============ -->
+<section id="features">
+  <div class="container">
+    <div class="section-title">
+      <h2>Hệ thống <span>13 Lá Chắn</span></h2>
+      <p>Tự động kiểm tra, phát hiện và xử lý mọi mối đe dọa trong tích tắc</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-num">LÁ CHẮN 1</div>
+        <h3>🛡️ Anti-Nuke</h3>
+        <p>Bộ não trung tâm, điều phối toàn bộ 12 lá chắn còn lại trong hệ thống.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">LÁ CHẮN 2</div>
+        <h3>📁 Anti-Channel</h3>
+        <p>Xóa kênh rác, chống tạo kênh hàng loạt trái phép.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">LÁ CHẮN 3</div>
+        <h3>🔗 Anti-Webhook</h3>
+        <p>Xóa webhook rác, chống tạo webhook trái phép.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">LÁ CHẮN 4</div>
+        <h3>🔄 Background Scan</h3>
+        <p>Quét server tự động mỗi 15 giây để phát hiện bất thường.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">LÁ CHẮN 5</div>
+        <h3>💬 Anti-Spam</h3>
+        <p>Chặn spam tin nhắn, ping @everyone hàng loạt.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">LÁ CHẮN 6</div>
+        <h3>⚔️ Anti-Raid</h3>
+        <p>Kick hàng loạt khi phát hiện raid server.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">LÁ CHẮN 7</div>
+        <h3>🔞 Anti-NSFW</h3>
+        <p>Xóa tin nhắn, ảnh 18+ khỏi server tự động.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">LÁ CHẮN 8</div>
+        <h3>🤖 Anti-Bot</h3>
+        <p>Cách ly bot lạ, chờ phê duyệt trước khi hoạt động.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">LÁ CHẮN 9</div>
+        <h3>😀 Anti-Emoji</h3>
+        <p>Chặn spam emoji, sticker, reaction hàng loạt.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">LÁ CHẮN 10</div>
+        <h3>🎣 Anti-Scam</h3>
+        <p>Chặn link lừa đảo, ảnh crypto scam độc hại.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">LÁ CHẮN 11</div>
+        <h3>👶 Anti-Age</h3>
+        <p>Xóa tin nhắn chia sẻ tuổi tác không phù hợp.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">LÁ CHẮN 12</div>
+        <h3>🎭 Anti-Role</h3>
+        <p>Xóa role rác, chống tạo role hàng loạt trái phép.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">LÁ CHẮN 13</div>
+        <h3>🚫 Anti-Nuke-Bot</h3>
+        <p>Blacklist + ban bot có hành vi nuke server.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="space-y-8 text-slate-300 leading-relaxed text-sm md:text-base">
-                
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="text-blue-400">1.</span> Giới Thiệu & Thỏa Thuận Pháp Lý
-                    </h3>
-                    <p class="text-slate-400">
-                        Điều khoản Dịch vụ này ("Thỏa thuận") là hợp đồng pháp lý giữa bạn (với tư cách là Quản trị viên máy chủ, Chủ sở hữu máy chủ hoặc Người dùng cá nhân) và đội ngũ phát triển <strong>Bot Bảo Vệ</strong>. Việc bạn mời Bot vào máy chủ, tương tác với các câu lệnh, hoặc sử dụng bất kỳ dịch vụ phụ trợ nào liên quan đồng nghĩa với việc bạn xác nhận đã đọc, hiểu và đồng ý vô điều kiện với tất cả các điều khoản được quy định trong văn bản này.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="text-blue-400">2.</span> Điều Kiện Sử Dụng & Độ Tuổi Quy Định
-                    </h3>
-                    <p class="text-slate-400">
-                        Để sử dụng **Bot Bảo Vệ**, bạn bắt buộc phải tuân thủ các quy định độ tuổi tối thiểu theo Điều khoản Dịch vụ chung của Discord Inc. (tối thiểu từ 13 tuổi trở lên hoặc độ tuổi tối thiểu theo quy định pháp luật tại quốc gia của bạn). Nếu bạn đại diện cho một tổ chức hoặc cộng đồng, bạn cam kết rằng mình có đầy đủ thẩm quyền pháp lý để ràng buộc tổ chức đó với Thỏa thuận này.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="text-blue-400">3.</span> Phạm Vi Cung Cấp Dịch Vụ & Quyền Hạn
-                    </h3>
-                    <p class="text-slate-400 mb-3">
-                        **Bot Bảo Vệ** cung cấp các giải pháp tự động hóa an ninh cho máy chủ Discord, bao gồm nhưng không giới hạn ở:
-                    </p>
-                    <ul class="list-disc list-inside space-y-2 text-slate-400 pl-4 border-l-2 border-blue-500/30">
-                        <li>Lọc và chặn các liên kết độc hại, liên kết lừa đảo (Phishing), liên kết mời máy chủ rác.</li>
-                        <li>Phát hiện và ngăn chặn hành vi Spam, Flooding, Mention-spam, Self-bot, và Raid tự động.</li>
-                        <li>Thực thi các biện pháp xử phạt tự động hoặc thủ công: Cảnh báo (Warn), Cấm chat (Timeout/Mute), Đuổi (Kick), Cấm vĩnh viễn (Ban).</li>
-                        <li>Ghi nhận nhật ký sự cố an ninh và quản lý danh sách thành viên vi phạm kỷ luật.</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="text-blue-400">4.</span> Hành Vi Bị Nghiêm Cấm (Prohibited Conduct)
-                    </h3>
-                    <p class="text-slate-400 mb-3">
-                        Người dùng và Quản trị viên không được phép thực hiện hoặc hỗ trợ bất kỳ hành vi nào sau đây:
-                    </p>
-                    <div class="grid md:grid-cols-2 gap-4 my-3 text-xs md:text-sm">
-                        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
-                            <strong class="text-red-400 block mb-1"><i class="fa-solid fa-bug mr-1"></i> Khai thác lỗi (Exploitation)</strong>
-                            Lợi dụng các lỗi phần mềm (bugs) hoặc lỗ hổng bảo mật của Bot nhằm mục đích phá hoại máy chủ khác hoặc làm quá tải tài nguyên hệ thống.
-                        </div>
-                        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
-                            <strong class="text-red-400 block mb-1"><i class="fa-solid fa-server mr-1"></i> Tấn công hệ thống (DDoS/Spam)</strong>
-                            Gửi hàng loạt lệnh giả mạo, thực hiện tấn công Từ chối Dịch vụ (DDoS) hoặc can thiệp vào hoạt động bình thường của máy chủ lưu trữ Bot.
-                        </div>
-                        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
-                            <strong class="text-red-400 block mb-1"><i class="fa-solid fa-user-ninja mr-1"></i> Giả mạo & Lừa đảo</strong>
-                            Sử dụng Bot Bảo Vệ để tạo các thông báo giả mạo thương hiệu, lừa đảo tài sản của người dùng hoặc vi phạm pháp luật hiện hành.
-                        </div>
-                        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
-                            <strong class="text-red-400 block mb-1"><i class="fa-solid fa-code-compare mr-1"></i> Reverse Engineering</strong>
-                            Cố tình sao chép, giải mã mã nguồn, phân tích ngược hoặc bán lại dịch vụ của Bot Bảo Vệ khi chưa được cấp phép bằng văn bản.
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="text-blue-400">5.</span> Giới Hạn Trách Nhiệm Pháp Lý (Limitation of Liability)
-                    </h3>
-                    <p class="text-slate-400">
-                        Dịch vụ được cung cấp dựa trên nguyên tắc **"As-Is" (Nguyên trạng)** và **"As-Available" (Tùy thuộc vào khả năng đáp ứng)**. Đội ngũ phát triển không đưa ra bất kỳ bảo đảm nào, dù rõ ràng hay ngầm hiểu, về khả năng hoạt động liên tục 100%, không gián đoạn, hoặc không có sai sót. Trong mọi trường hợp, chúng tôi không chịu trách nhiệm đối với bất kỳ thiệt hại trực tiếp, gián tiếp, ngẫu nhiên hoặc do hậu quả phát sinh từ:
-                    </p>
-                    <ul class="list-disc list-inside space-y-1 text-slate-400 pl-4 mt-2">
-                        <li>Việc Quản trị viên cấu hình sai quyền hạn (Permissions) dẫn đến rò rỉ quyền kiểm soát máy chủ.</li>
-                        <li>Sự cố mạng hoặc gián đoạn dịch vụ từ phía API Discord Inc. hoặc nhà cung cấp máy chủ đám mây.</li>
-                        <li>Hành vi phá hoại do tài khoản Quản trị viên bị lộ token/mật khẩu cá nhân.</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="text-blue-400">6.</span> Quyền Chấm Dứt Dịch Vụ & Đưa Vào Danh Sách Đen (Blacklist)
-                    </h3>
-                    <p class="text-slate-400">
-                        Chúng tôi có toàn quyền ngừng cung cấp dịch vụ, thu hồi quyền truy cập hoặc đưa bất kỳ Máy chủ / ID Người dùng nào vào Danh sách đen (Blacklist) vĩnh viễn mà không cần báo trước nếu phát hiện vi phạm Điều khoản Dịch vụ này hoặc Điều khoản Cộng đồng của Discord.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="text-blue-400">7.</span> Sửa Đổi & Cập Nhật Điều Khoản
-                    </h3>
-                    <p class="text-slate-400">
-                        Đội ngũ phát triển có quyền cập nhật, chỉnh sửa văn bản này vào bất kỳ lúc nào để phù hợp với các quy định pháp lý mới hoặc thay đổi tính năng dịch vụ. Các thay đổi sẽ có hiệu lực ngay khi được đăng tải lên trang web này. Việc bạn tiếp tục duy trì **Bot Bảo Vệ** trong máy chủ sau khi điều khoản được cập nhật đồng nghĩa với việc bạn chấp nhận toàn bộ các sửa đổi đó.
-                    </p>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- PRIVACY POLICY (CHÍNH SÁCH BẢO MẬT DÀI CHI TIẾT) -->
-        <section id="privacy" class="glass-panel p-8 md:p-12 rounded-3xl glow-effect">
-            <div class="flex items-center gap-4 mb-8 border-b border-slate-800 pb-6">
-                <div class="p-3.5 bg-emerald-500/10 text-emerald-400 rounded-2xl text-2xl">
-                    <i class="fa-solid fa-user-shield"></i>
-                </div>
-                <div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-white">Chính Sách Bảo Mật (Privacy Policy)</h2>
-                    <p class="text-xs text-slate-400 mt-1">Cam kết bảo vệ dữ liệu chuẩn Discord Developer Policy | Cập nhật: 20/09/2026</p>
-                </div>
-            </div>
-
-            <div class="space-y-8 text-slate-300 leading-relaxed text-sm md:text-base">
-                
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="text-emerald-400">1.</span> Cam Kết Về Quyền Riêng Tư
-                    </h3>
-                    <p class="text-slate-400">
-                        Chính sách Bảo mật này mô tả chi tiết cách thức **Bot Bảo Vệ** thu thập, xử lý, lưu trữ và bảo vệ thông tin cá nhân cũng như dữ liệu máy chủ của bạn. Chúng tôi tôn trọng tuyệt đối quyền riêng tư của người dùng và cam kết thực hiện nghiêm túc các chính sách về dữ liệu theo quy định của Discord Developer Terms.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="text-emerald-400">2.</span> Chi Tiết Các Dữ Liệu Được Thu Thập
-                    </h3>
-                    <p class="text-slate-400 mb-3">
-                        Để vận hành hệ thống an ninh, Bot chỉ thu thập những dữ liệu cần thiết tối thiểu (Data Minimization) bao gồm:
-                    </p>
-                    
-                    <div class="space-y-3 my-4">
-                        <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                            <h4 class="font-semibold text-white mb-1 text-sm"><i class="fa-solid fa-passport text-emerald-400 mr-2"></i>Dữ Liệu Định Danh Kỹ Thuật (IDs)</h4>
-                            <p class="text-xs text-slate-400">Lưu trữ Discord User ID, Guild ID (Server ID), Channel ID, Role ID để nhận diện phân quyền, lưu cấu hình cài đặt riêng cho từng máy chủ và phục vụ lệnh kỷ luật.</p>
-                        </div>
-                        <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                            <h4 class="font-semibold text-white mb-1 text-sm"><i class="fa-solid fa-gavel text-emerald-400 mr-2"></i>Nhật Ký Xử Lý Kỷ Luật (Moderation Logs)</h4>
-                            <p class="text-xs text-slate-400">Lưu trữ lịch sử cảnh cáo (Warnings), lý do bị phạt, thời gian bị Mute/Ban, ID của Quản trị viên thực hiện lệnh nhằm phục vụ việc tra cứu nhật ký an ninh.</p>
-                        </div>
-                        <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                            <h4 class="font-semibold text-white mb-1 text-sm"><i class="fa-solid fa-sliders text-emerald-400 mr-2"></i>Dữ Liệu Cấu Hình Máy Chủ</h4>
-                            <p class="text-xs text-slate-400">Lưu trữ các cài đặt bộ lọc do Quản trị viên tùy chỉnh (danh sách từ cấm, kênh cho phép gửi link, độ nhạy anti-spam, prefix tùy chỉnh).</p>
-                        </div>
-                    </div>
-
-                    <div class="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl text-xs text-amber-300">
-                        <strong class="font-bold block mb-1">⚠️ QUY ĐỊNH VỀ NỘI DUNG TIN NHẮN (MESSAGE CONTENT):</strong>
-                        Bot Bảo Vệ <strong>KHÔNG LƯU TRỮ VĨNH VIỄN</strong> bất kỳ nội dung tin nhắn văn bản nào của bạn vào Cơ sở dữ liệu. Nội dung tin nhắn chỉ được quét tạm thời trực tiếp trên bộ nhớ truy cập ngẫu nhiên (RAM) trong thời gian thực (real-time) để phát hiện liên kết độc hại, mã độc hoặc hành vi spam, sau đó sẽ bị hủy ngay lập tức khỏi bộ nhớ đệm.
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="text-emerald-400">3.</span> Mục Đích Sử Dụng Dữ Liệu
-                    </h3>
-                    <p class="text-slate-400 mb-2">
-                        Toàn bộ dữ liệu thu thập được sử dụng duy nhất cho các mục đích kỹ thuật sau:
-                    </p>
-                    <ul class="list-disc list-inside space-y-1 text-slate-400 pl-4">
-                        <li>Duy trì và vận hành các tính năng cốt lõi của Bot Bảo Vệ.</li>
-                        <li>Xác minh quyền hạn của người dùng trước khi thực thi các lệnh quản trị cao cấp.</li>
-                        <li>Cung cấp báo cáo thống kê tình trạng an ninh cho Quản trị viên máy chủ.</li>
-                        <li>Tối ưu hóa các thuật toán phát hiện tài khoản ảo (Alt accounts) và Bot spam độc hại.</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="text-emerald-400">4.</span> Cam Kết Không Chia Sẻ Dữ Liệu
-                    </h3>
-                    <p class="text-slate-400">
-                        Chúng tôi <strong>TUYỆT ĐỐI KHÔNG</strong> bán, cho thuê, trao đổi hoặc chia sẻ bất kỳ thông tin hay dữ liệu nào của bạn cho bên thứ ba vì mục đích thương mại, tiếp thị hoặc quảng cáo. Dữ liệu chỉ được tiết lộ trong các trường hợp ngoại lệ duy nhất sau:
-                    </p>
-                    <ul class="list-disc list-inside space-y-1 text-slate-400 pl-4 mt-2">
-                        <li>Có yêu cầu chính thức bằng văn bản từ cơ quan thực thi pháp luật có thẩm quyền.</li>
-                        <li>Để tuân thủ các quy định bắt buộc từ Điều khoản Dịch vụ của Discord Inc.</li>
-                        <li>Để bảo vệ quyền lợi, tài sản hoặc sự an toàn của đội ngũ phát triển và cộng đồng người dùng trước các cuộc tấn công mạng nghiêm trọng.</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="text-emerald-400">5.</span> Biện Pháp Bảo Mật Dữ Liệu (Data Security)
-                    </h3>
-                    <p class="text-slate-400">
-                        Chúng tôi áp dụng các tiêu chuẩn bảo mật công nghiệp hàng đầu để bảo vệ dữ liệu của bạn khỏi việc truy cập, thay đổi, tiết lộ hoặc phá hủy trái phép. Cơ sở dữ liệu được mã hóa khi lưu trữ (Encryption at Rest) và mã hóa trên đường truyền (SSL/TLS). Chỉ các quản trị viên hệ thống có thẩm quyền mới được cấp quyền truy cập vào máy chủ cơ sở dữ liệu.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="text-emer
+<!-- ============ COMMANDS ============ -->
+<section id="commands" style="background: rgba(15, 20, 32, 0.4);">
+  <div class="container">
+    <div class="section-title">
+      <h2>Danh sách <span>Lệnh</span></h2>
+      <p>29 lệnh điều khiển hệ thống Anti-Nuke Bot</p>
+    </div>
+    <div class="commands-wrapper">
+      <table class="commands-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Lệnh</th>
+            <th>Cú pháp</th>
+            <th>Mô tả</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="stt">1</span></td><td>Dọn kênh rác</td><td><code>!sweepchannels</code></td><td>Dọn sạch kênh rác hàng loạt (Blizzard Mode)</td></tr>
+          <tr><td><span class="stt">2</span></td><td>Dọn role rác</td><td><code>!sweeproles</code></td><td>Dọn sạch role rác hàng loạt</td></tr>
+          <tr><td><span class="stt">3</span></td><td>Dọn tin nhắn</td><td><code>!sweepmessages &lt;số&gt;</code></td><td>Dọn tin nhắn rác (mặc định 100)</td></tr>
+          <tr><td><span class="stt">4</span></td><td>Đổi avatar server</td><td><code>!nukeavatar</code></td><td>Đổi avatar server thành Khiên đỏ khi bị nuke</td></tr>
+          <tr><td><span class="stt">5</span></td><td>Set avatar thủ công</td><td><code>!setavatar</code></td><td>Đổi avatar server (kèm ảnh hoặc link)</td></tr>
+          <tr><td><span class="stt">6</span></td><td>Tạo kênh an toàn</td><td><code>!taokenh &lt;tên kênh&gt;</code></td><td>Tạo kênh văn bản mới (Anti-Channel bỏ qua)</td></tr>
+          <tr><td><span class="stt">7</span></td><td>Honeypot setup</td><td><code>!honeypot setup #kênh</code></td><td>Đặt kênh mồi (ai gõ vào bị kick)</td></tr>
+          <tr><td><span class="stt">8</span></td><td>Honeypot off</td><td><code>!honeypot off</code></td><td>Tắt kênh mồi</td></tr>
+          <tr><td><span class="stt">9</span></td><td>Honeypot xem</td><td><code>!honeypot</code></td><td>Xem kênh mồi hiện tại</td></tr>
+          <tr><td><span class="stt">10</span></td><td>Log Anti-Nuke</td><td><code>!log #kênh</code></td><td>Đặt kênh nhận log Anti-Nuke</td></tr>
+          <tr><td><span class="stt">11</span></td><td>Log off</td><td><code>!log off</code></td><td>Tắt log Anti-Nuke</td></tr>
+          <tr><td><span class="stt">12</span></td><td>Log Blacklist</td><td><code>!log blacklist #kênh</code></td><td>Đặt kênh log Blacklist (tự động mỗi 1h)</td></tr>
+          <tr><td><span class="stt">13</span></td><td>Log Blacklist off</td><td><code>!log blacklist off</code></td><td>Tắt log Blacklist</td></tr>
+          <tr><td><span class="stt">14</span></td><td>Setup kênh update</td><td><code>!setupupdate #kênh</code></td><td>Đặt kênh nhận thông báo cập nhật</td></tr>
+          <tr><td><span class="stt">15</span></td><td>Verify setup</td><td><code>!verified @role</code></td><td>Setup kênh xác minh captcha</td></tr>
+          <tr><td><span class="stt">16</span></td><td>Verify off</td><td><code>!verified off</code></td><td>Tắt hệ thống xác minh</td></tr>
+          <tr><td><span class="stt">17</span></td><td>Thêm blacklist</td><td><code>!addblacklist @user [lý do]</code></td><td>Thêm người/bot vào blacklist</td></tr>
+          <tr><td><span class="stt">18</span></td><td>Xóa blacklist</td><td><code>!removeblacklist @user</code></td><td>Xóa khỏi blacklist</td></tr>
+          <tr><td><span class="stt">19</span></td><td>DS blacklist</td><td><code>!listblacklist
