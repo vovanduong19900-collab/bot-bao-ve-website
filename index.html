@@ -4,282 +4,92 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anti-Nuke Bot — Bảo vệ Server Discord</title>
-<meta name="description" content="Anti-Nuke Bot - Hệ thống bảo vệ server Discord với 13 lá chắn tự động">
+<meta name="description" content="Anti-Nuke Bot - Bảo vệ server Discord với 13 lá chắn tự động">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body {
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  background: #0a0e1a;
-  color: #e6edf3;
-  line-height: 1.7;
-  overflow-x: hidden;
-}
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #0a0e1a; color: #e6edf3; line-height: 1.7; overflow-x: hidden; }
 a { color: #ff4757; text-decoration: none; transition: 0.3s; }
 a:hover { color: #ff6b7a; }
 
-/* ===== NAVBAR ===== */
-nav {
-  position: fixed; top: 0; width: 100%;
-  background: rgba(10, 14, 26, 0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 71, 87, 0.2);
-  z-index: 999; padding: 14px 0;
-}
-.nav-container {
-  max-width: 1200px; margin: 0 auto; padding: 0 20px;
-  display: flex; justify-content: space-between; align-items: center;
-  gap: 16px;
-}
-.logo {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 18px; font-weight: 700; color: #fff;
-  flex-shrink: 0;
-}
-.logo-icon {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: linear-gradient(135deg, #ff4757, #c0392b);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px; box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
-}
+nav { position: fixed; top: 0; width: 100%; background: rgba(10, 14, 26, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 71, 87, 0.2); z-index: 999; padding: 14px 0; }
+.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; color: #fff; flex-shrink: 0; }
+.logo-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #ff4757, #c0392b); display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 0 20px rgba(255, 71, 87, 0.5); }
 .nav-links { display: flex; gap: 22px; list-style: none; align-items: center; }
-.nav-links a {
-  color: #b0b8c4; font-size: 13.5px; font-weight: 500;
-  position: relative; padding: 6px 0;
-}
+.nav-links a { color: #b0b8c4; font-size: 13.5px; font-weight: 500; }
 .nav-links a:hover { color: #ff4757; }
-.nav-invite {
-  background: linear-gradient(135deg, #5865f2, #4752c4);
-  color: #fff !important; padding: 8px 16px !important;
-  border-radius: 10px; font-weight: 600 !important;
-  font-size: 13px !important; white-space: nowrap;
-  box-shadow: 0 4px 14px rgba(88, 101, 242, 0.3);
-}
-.nav-invite:hover { transform: translateY(-2px); color: #fff !important; }
+.nav-invite { background: linear-gradient(135deg, #5865f2, #4752c4); color: #fff !important; padding: 8px 16px !important; border-radius: 10px; font-weight: 600 !important; font-size: 13px !important; white-space: nowrap; }
 
-/* ===== HERO ===== */
-.hero {
-  min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  padding: 100px 20px 60px; text-align: center; position: relative;
-  background: radial-gradient(ellipse at top, rgba(255, 71, 87, 0.15), transparent 60%);
-}
-.hero::before {
-  content: ''; position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 71, 87, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 71, 87, 0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  mask-image: radial-gradient(ellipse at center, black, transparent 70%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black, transparent 70%);
-}
+.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 100px 20px 60px; text-align: center; position: relative; background: radial-gradient(ellipse at top, rgba(255, 71, 87, 0.15), transparent 60%); }
 .hero-content { position: relative; z-index: 2; max-width: 800px; }
-.hero-badge {
-  display: inline-block; padding: 6px 16px; border-radius: 20px;
-  background: rgba(255, 71, 87, 0.1); border: 1px solid rgba(255, 71, 87, 0.3);
-  color: #ff4757; font-size: 13px; font-weight: 600;
-  margin-bottom: 24px; animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.4); }
-  50% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); }
-}
-.hero h1 {
-  font-size: clamp(36px, 6vw, 62px); font-weight: 800;
-  line-height: 1.1; margin-bottom: 20px;
-  background: linear-gradient(135deg, #fff 30%, #ff4757);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero p {
-  font-size: 17px; color: #b0b8c4; margin-bottom: 36px;
-  max-width: 600px; margin-left: auto; margin-right: auto;
-}
+.hero-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; background: rgba(255, 71, 87, 0.1); border: 1px solid rgba(255, 71, 87, 0.3); color: #ff4757; font-size: 13px; font-weight: 600; margin-bottom: 24px; }
+.hero h1 { font-size: clamp(36px, 6vw, 62px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; background: linear-gradient(135deg, #fff 30%, #ff4757); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { font-size: 17px; color: #b0b8c4; margin-bottom: 36px; max-width: 600px; margin-left: auto; margin-right: auto; }
 .hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-.btn {
-  padding: 14px 28px; border-radius: 12px; font-size: 15px;
-  font-weight: 600; cursor: pointer; transition: 0.3s;
-  border: none; display: inline-flex; align-items: center; gap: 8px;
-}
-.btn-primary {
-  background: linear-gradient(135deg, #ff4757, #c0392b); color: #fff;
-  box-shadow: 0 8px 24px rgba(255, 71, 87, 0.35);
-}
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(255, 71, 87, 0.5); color: #fff; }
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.05); color: #e6edf3;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.btn-secondary:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-3px); color: #e6edf3; }
-.btn-invite {
-  background: linear-gradient(135deg, #5865f2, #4752c4); color: #fff;
-  box-shadow: 0 8px 24px rgba(88, 101, 242, 0.4);
-}
-.btn-invite:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(88, 101, 242, 0.6); color: #fff; }
-.btn-invite svg { width: 20px; height: 20px; fill: currentColor; }
+.btn { padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; transition: 0.3s; border: none; display: inline-flex; align-items: center; gap: 8px; }
+.btn-invite { background: linear-gradient(135deg, #5865f2, #4752c4); color: #fff; box-shadow: 0 8px 24px rgba(88, 101, 242, 0.4); }
+.btn-invite:hover { transform: translateY(-3px); color: #fff; }
+.btn-secondary { background: rgba(255, 255, 255, 0.05); color: #e6edf3; border: 1px solid rgba(255, 255, 255, 0.1); }
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.1); color: #e6edf3; }
 
-/* ===== SECTIONS ===== */
 section { padding: 80px 20px; scroll-margin-top: 80px; }
 section.alt { background: rgba(15, 20, 32, 0.4); }
 .container { max-width: 1200px; margin: 0 auto; }
 .section-title { text-align: center; margin-bottom: 50px; }
-.section-title h2 {
-  font-size: clamp(28px, 4vw, 40px); font-weight: 700;
-  margin-bottom: 12px; color: #fff;
-}
+.section-title h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 700; margin-bottom: 12px; color: #fff; }
 .section-title h2 span { color: #ff4757; }
 .section-title p { color: #8892a0; font-size: 15px; max-width: 600px; margin: 0 auto; }
 
-/* ===== FEATURES ===== */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 18px;
-}
-.feature-card {
-  background: linear-gradient(145deg, rgba(26, 32, 46, 0.9), rgba(15, 20, 32, 0.9));
-  border: 1px solid rgba(255, 71, 87, 0.15);
-  border-radius: 14px; padding: 22px;
-  transition: 0.3s; position: relative; overflow: hidden;
-}
-.feature-card::before {
-  content: ''; position: absolute; top: 0; left: 0;
-  width: 3px; height: 0; background: #ff4757;
-  transition: 0.4s;
-}
-.feature-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(255, 71, 87, 0.4);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
-.feature-card:hover::before { height: 100%; }
-.feature-num {
-  display: inline-block; font-size: 11px; font-weight: 700;
-  color: #ff4757; background: rgba(255, 71, 87, 0.1);
-  padding: 3px 9px; border-radius: 6px; margin-bottom: 12px;
-}
-.feature-card h3 {
-  font-size: 16px; color: #fff; margin-bottom: 6px;
-  display: flex; align-items: center; gap: 8px;
-}
+.features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.feature-card { background: linear-gradient(145deg, rgba(26, 32, 46, 0.9), rgba(15, 20, 32, 0.9)); border: 1px solid rgba(255, 71, 87, 0.15); border-radius: 14px; padding: 22px; transition: 0.3s; }
+.feature-card:hover { transform: translateY(-6px); border-color: rgba(255, 71, 87, 0.4); }
+.feature-num { display: inline-block; font-size: 11px; font-weight: 700; color: #ff4757; background: rgba(255, 71, 87, 0.1); padding: 3px 9px; border-radius: 6px; margin-bottom: 12px; }
+.feature-card h3 { font-size: 16px; color: #fff; margin-bottom: 6px; }
 .feature-card p { color: #8892a0; font-size: 13.5px; }
 
-/* ===== COMMANDS TABLE ===== */
-.commands-wrapper {
-  background: rgba(15, 20, 32, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 16px; overflow-x: auto;
-}
-.commands-table {
-  width: 100%; border-collapse: collapse; font-size: 14px;
-  min-width: 750px;
-}
+.commands-wrapper { background: rgba(15, 20, 32, 0.6); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 16px; overflow-x: auto; }
+.commands-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 750px; }
 .commands-table thead { background: rgba(255, 71, 87, 0.1); }
-.commands-table th {
-  text-align: left; padding: 15px 18px;
-  color: #ff4757; font-weight: 600; font-size: 12.5px;
-  text-transform: uppercase; letter-spacing: 0.5px;
-}
-.commands-table td {
-  padding: 13px 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  color: #c4ccd8;
-}
-.commands-table tr:hover td { background: rgba(255, 71, 87, 0.04); }
-.commands-table code {
-  background: rgba(255, 71, 87, 0.12);
-  color: #ff6b7a; padding: 3px 8px; border-radius: 6px;
-  font-family: 'Consolas', monospace; font-size: 12.5px;
-  white-space: nowrap;
-}
-.stt {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 25px; height: 25px; border-radius: 7px;
-  background: rgba(255, 71, 87, 0.15); color: #ff4757;
-  font-weight: 700; font-size: 11.5px;
-}
+.commands-table th { text-align: left; padding: 15px 18px; color: #ff4757; font-weight: 600; font-size: 12.5px; text-transform: uppercase; }
+.commands-table td { padding: 13px 18px; border-top: 1px solid rgba(255, 255, 255, 0.05); color: #c4ccd8; }
+.commands-table code { background: rgba(255, 71, 87, 0.12); color: #ff6b7a; padding: 3px 8px; border-radius: 6px; font-family: 'Consolas', monospace; font-size: 12.5px; white-space: nowrap; }
+.stt { display: inline-flex; align-items: center; justify-content: center; width: 25px; height: 25px; border-radius: 7px; background: rgba(255, 71, 87, 0.15); color: #ff4757; font-weight: 700; font-size: 11.5px; }
 
-/* ===== LEGAL ===== */
-.legal-container {
-  max-width: 900px; margin: 0 auto;
-  background: linear-gradient(145deg, rgba(26, 32, 46, 0.7), rgba(15, 20, 32, 0.7));
-  border: 1px solid rgba(255, 71, 87, 0.15);
-  border-radius: 20px; padding: 40px;
-}
-.legal-container h3 {
-  color: #ff4757; font-size: 19px; margin: 30px 0 12px;
-  padding-bottom: 8px; border-bottom: 1px solid rgba(255, 71, 87, 0.15);
-  display: flex; align-items: center; gap: 10px;
-}
-.legal-container h3:first-of-type { margin-top: 0; }
-.legal-container h3 .num {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 30px; height: 30px; border-radius: 8px;
-  background: rgba(255, 71, 87, 0.15);
-  font-size: 13px; font-weight: 700; flex-shrink: 0;
-}
+.legal-container { max-width: 900px; margin: 0 auto; background: linear-gradient(145deg, rgba(26, 32, 46, 0.7), rgba(15, 20, 32, 0.7)); border: 1px solid rgba(255, 71, 87, 0.15); border-radius: 20px; padding: 40px; }
+.legal-container h3 { color: #ff4757; font-size: 19px; margin: 30px 0 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 71, 87, 0.15); display: flex; align-items: center; gap: 10px; }
+.legal-container h3 .num { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: rgba(255, 71, 87, 0.15); font-size: 13px; font-weight: 700; flex-shrink: 0; }
 .legal-container p { color: #b0b8c4; margin-bottom: 12px; font-size: 14.5px; }
 .legal-container ul { margin: 10px 0 14px 24px; color: #b0b8c4; }
 .legal-container li { margin-bottom: 8px; font-size: 14.5px; }
 .legal-container strong { color: #fff; }
-.highlight {
-  background: rgba(255, 71, 87, 0.08);
-  border-left: 3px solid #ff4757;
-  padding: 14px 18px; border-radius: 8px; margin: 16px 0;
-  color: #c4ccd8; font-size: 14.5px;
-}
-.highlight.warning {
-  background: rgba(255, 165, 0, 0.08);
-  border-left-color: #ffa500;
-}
-.highlight.success {
-  background: rgba(0, 255, 100, 0.08);
-  border-left-color: #00ff64;
-}
+.highlight { background: rgba(255, 71, 87, 0.08); border-left: 3px solid #ff4757; padding: 14px 18px; border-radius: 8px; margin: 16px 0; color: #c4ccd8; font-size: 14.5px; }
+.highlight.warning { background: rgba(255, 165, 0, 0.08); border-left-color: #ffa500; }
+.highlight.success { background: rgba(0, 255, 100, 0.08); border-left-color: #00ff64; }
 
-/* ===== CTA MIDDLE ===== */
-.cta-box {
-  text-align: center; padding: 50px 30px;
-  background: linear-gradient(135deg, rgba(88, 101, 242, 0.12), rgba(255, 71, 87, 0.12));
-  border: 1px solid rgba(255, 71, 87, 0.2);
-  border-radius: 20px; margin-top: 40px;
-}
+.cta-box { text-align: center; padding: 50px 30px; background: linear-gradient(135deg, rgba(88, 101, 242, 0.12), rgba(255, 71, 87, 0.12)); border: 1px solid rgba(255, 71, 87, 0.2); border-radius: 20px; margin-top: 40px; }
 .cta-box h3 { color: #fff; font-size: 24px; margin-bottom: 10px; }
 .cta-box p { color: #b0b8c4; margin-bottom: 24px; }
 
-/* ===== FOOTER ===== */
-footer {
-  padding: 40px 20px; text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  color: #8892a0; font-size: 14px;
-}
-footer .footer-links {
-  display: flex; gap: 22px; justify-content: center;
-  margin-bottom: 20px; flex-wrap: wrap;
-}
+footer { padding: 40px 20px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.06); color: #8892a0; font-size: 14px; }
+footer .footer-links { display: flex; gap: 22px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
 footer .footer-links a { color: #b0b8c4; font-size: 14px; }
-footer .footer-links a:hover { color: #ff4757; }
 
-/* ===== MOBILE ===== */
 @media (max-width: 768px) {
   .nav-links li:not(:last-child) { display: none; }
   .nav-links { gap: 10px; }
   .nav-invite { padding: 7px 12px !important; font-size: 12px !important; }
   .logo span { display: none; }
   .hero h1 { font-size: 32px; }
-  .hero p { font-size: 15px; }
   .btn { padding: 12px 20px; font-size: 14px; }
-  .commands-table { font-size: 13px; }
   .commands-table th, .commands-table td { padding: 10px 12px; }
   .legal-container { padding: 22px; }
   section { padding: 55px 16px; }
-  .cta-box { padding: 32px 20px; }
-  .cta-box h3 { font-size: 20px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ============ NAVBAR ============ -->
 <nav>
   <div class="nav-container">
     <a href="#top" class="logo">
@@ -291,32 +101,23 @@ footer .footer-links a:hover { color: #ff4757; }
       <li><a href="#commands">Lệnh</a></li>
       <li><a href="#privacy">Bảo mật</a></li>
       <li><a href="#terms">Điều khoản</a></li>
-      <li>
-        <a href="https://discord.com/oauth2/authorize?client_id=1557731965686521997"
-           target="_blank" rel="noopener" class="nav-invite">➕ Mời Bot</a>
-      </li>
+      <li><a href="https://discord.com/oauth2/authorize?client_id=1557731965686521997" target="_blank" rel="noopener" class="nav-invite">➕ Mời Bot</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="hero-content">
     <div class="hero-badge">⚡ Hệ thống bảo vệ tự động 24/7</div>
     <h1>Bảo vệ Server Discord<br>Khỏi mọi cuộc tấn công</h1>
     <p>Anti-Nuke Bot với 13 lá chắn tự động, phát hiện và ngăn chặn mọi hành vi phá hoại server trong tích tắc.</p>
     <div class="hero-buttons">
-      <a href="https://discord.com/oauth2/authorize?client_id=1557731965686521997"
-         target="_blank" rel="noopener" class="btn btn-invite">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-        Mời Bot Ngay
-      </a>
+      <a href="https://discord.com/oauth2/authorize?client_id=1557731965686521997" target="_blank" rel="noopener" class="btn btn-invite">🎯 Mời Bot Ngay</a>
       <a href="#features" class="btn btn-secondary">🚀 Khám phá chức năng</a>
     </div>
   </div>
 </section>
 
-<!-- ============ FEATURES ============ -->
 <section id="features">
   <div class="container">
     <div class="section-title">
@@ -324,77 +125,23 @@ footer .footer-links a:hover { color: #ff4757; }
       <p>Tự động kiểm tra, phát hiện và xử lý mọi mối đe dọa trong tích tắc</p>
     </div>
     <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-num">LÁ CHẮN 1</div>
-        <h3>🛡️ Anti-Nuke</h3>
-        <p>Bộ não trung tâm, điều phối toàn bộ 12 lá chắn còn lại trong hệ thống.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">LÁ CHẮN 2</div>
-        <h3>📁 Anti-Channel</h3>
-        <p>Xóa kênh rác, chống tạo kênh hàng loạt trái phép.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">LÁ CHẮN 3</div>
-        <h3>🔗 Anti-Webhook</h3>
-        <p>Xóa webhook rác, chống tạo webhook trái phép.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">LÁ CHẮN 4</div>
-        <h3>🔄 Background Scan</h3>
-        <p>Quét server tự động mỗi 15 giây để phát hiện bất thường.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">LÁ CHẮN 5</div>
-        <h3>💬 Anti-Spam</h3>
-        <p>Chặn spam tin nhắn, ping @everyone hàng loạt.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">LÁ CHẮN 6</div>
-        <h3>⚔️ Anti-Raid</h3>
-        <p>Kick hàng loạt khi phát hiện raid server.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">LÁ CHẮN 7</div>
-        <h3>🔞 Anti-NSFW</h3>
-        <p>Xóa tin nhắn, ảnh 18+ khỏi server tự động.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">LÁ CHẮN 8</div>
-        <h3>🤖 Anti-Bot</h3>
-        <p>Cách ly bot lạ, chờ phê duyệt trước khi hoạt động.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">LÁ CHẮN 9</div>
-        <h3>😀 Anti-Emoji</h3>
-        <p>Chặn spam emoji, sticker, reaction hàng loạt.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">LÁ CHẮN 10</div>
-        <h3>🎣 Anti-Scam</h3>
-        <p>Chặn link lừa đảo, ảnh crypto scam độc hại.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">LÁ CHẮN 11</div>
-        <h3>👶 Anti-Age</h3>
-        <p>Xóa tin nhắn chia sẻ tuổi tác không phù hợp.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">LÁ CHẮN 12</div>
-        <h3>🎭 Anti-Role</h3>
-        <p>Xóa role rác, chống tạo role hàng loạt trái phép.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">LÁ CHẮN 13</div>
-        <h3>🚫 Anti-Nuke-Bot</h3>
-        <p>Blacklist + ban bot có hành vi nuke server.</p>
-      </div>
+      <div class="feature-card"><div class="feature-num">LÁ CHẮN 1</div><h3>🛡️ Anti-Nuke</h3><p>Bộ não trung tâm, điều phối toàn bộ 12 lá chắn còn lại trong hệ thống.</p></div>
+      <div class="feature-card"><div class="feature-num">LÁ CHẮN 2</div><h3>📁 Anti-Channel</h3><p>Xóa kênh rác, chống tạo kênh hàng loạt trái phép.</p></div>
+      <div class="feature-card"><div class="feature-num">LÁ CHẮN 3</div><h3>🔗 Anti-Webhook</h3><p>Xóa webhook rác, chống tạo webhook trái phép.</p></div>
+      <div class="feature-card"><div class="feature-num">LÁ CHẮN 4</div><h3>🔄 Background Scan</h3><p>Quét server tự động mỗi 15 giây để phát hiện bất thường.</p></div>
+      <div class="feature-card"><div class="feature-num">LÁ CHẮN 5</div><h3>💬 Anti-Spam</h3><p>Chặn spam tin nhắn, ping @everyone hàng loạt.</p></div>
+      <div class="feature-card"><div class="feature-num">LÁ CHẮN 6</div><h3>⚔️ Anti-Raid</h3><p>Kick hàng loạt khi phát hiện raid server.</p></div>
+      <div class="feature-card"><div class="feature-num">LÁ CHẮN 7</div><h3>🔞 Anti-NSFW</h3><p>Xóa tin nhắn, ảnh 18+ khỏi server tự động.</p></div>
+      <div class="feature-card"><div class="feature-num">LÁ CHẮN 8</div><h3>🤖 Anti-Bot</h3><p>Cách ly bot lạ, chờ phê duyệt trước khi hoạt động.</p></div>
+      <div class="feature-card"><div class="feature-num">LÁ CHẮN 9</div><h3>😀 Anti-Emoji</h3><p>Chặn spam emoji, sticker, reaction hàng loạt.</p></div>
+      <div class="feature-card"><div class="feature-num">LÁ CHẮN 10</div><h3>🎣 Anti-Scam</h3><p>Chặn link lừa đảo, ảnh crypto scam độc hại.</p></div>
+      <div class="feature-card"><div class="feature-num">LÁ CHẮN 11</div><h3>👶 Anti-Age</h3><p>Xóa tin nhắn chia sẻ tuổi tác không phù hợp.</p></div>
+      <div class="feature-card"><div class="feature-num">LÁ CHẮN 12</div><h3>🎭 Anti-Role</h3><p>Xóa role rác, chống tạo role hàng loạt trái phép.</p></div>
+      <div class="feature-card"><div class="feature-num">LÁ CHẮN 13</div><h3>🚫 Anti-Nuke-Bot</h3><p>Blacklist + ban bot có hành vi nuke server.</p></div>
     </div>
   </div>
-</section>
-
-<!-- ============ COMMANDS ============ -->
-<section id="commands" class="alt">
+                                  </section>
+  <section id="commands" class="alt">
   <div class="container">
     <div class="section-title">
       <h2>Danh sách <span>Lệnh</span></h2>
@@ -402,14 +149,7 @@ footer .footer-links a:hover { color: #ff4757; }
     </div>
     <div class="commands-wrapper">
       <table class="commands-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Lệnh</th>
-            <th>Cú pháp</th>
-            <th>Mô tả</th>
-          </tr>
-        </thead>
+        <thead><tr><th>#</th><th>Lệnh</th><th>Cú pháp</th><th>Mô tả</th></tr></thead>
         <tbody>
           <tr><td><span class="stt">1</span></td><td>Dọn kênh rác</td><td><code>!sweepchannels</code></td><td>Dọn sạch kênh rác hàng loạt (Blizzard Mode)</td></tr>
           <tr><td><span class="stt">2</span></td><td>Dọn role rác</td><td><code>!sweeproles</code></td><td>Dọn sạch role rác hàng loạt</td></tr>
@@ -438,4 +178,173 @@ footer .footer-links a:hover { color: #ff4757; }
           <tr><td><span class="stt">25</span></td><td>Rời server</td><td><code>!roibot &lt;tên server&gt;</code></td><td>Rời khỏi server</td></tr>
           <tr><td><span class="stt">26</span></td><td>DS server</td><td><code>!danhsach</code></td><td>Xem danh sách server bot đang ở</td></tr>
           <tr><td><span class="stt">27</span></td><td>Thông tin server</td><td><code>!sever &lt;tên/ID&gt;</code></td><td>Xem thông tin server</td></tr>
-          <tr><td><span class="stt">28</span></td><td>Thông b
+          <tr><td><span class="stt">28</span></td><td>Thông báo</td><td><code>!thongbao &lt;nội dung&gt;</code></td><td>Gửi thông báo tới tất cả server</td></tr>
+          <tr><td><span class="stt">29</span></td><td>TB cập nhật</td><td><code>!thongbaocapnhat &lt;nội dung&gt;</code></td><td>Gửi thông báo cập nhật</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cta-box">
+      <h3>🛡️ Sẵn sàng bảo vệ server của bạn?</h3>
+      <p>Chỉ mất 10 giây để thêm Anti-Nuke Bot vào server Discord. Hoàn toàn miễn phí!</p>
+      <a href="https://discord.com/oauth2/authorize?client_id=1557731965686521997" target="_blank" rel="noopener" class="btn btn-invite">🎯 Thêm vào Server</a>
+    </div>
+  </div>
+</section>
+
+<section id="privacy">
+  <div class="container">
+    <div class="section-title">
+      <h2>Chính sách <span>Bảo mật</span></h2>
+      <p>Cập nhật lần cuối: 11 tháng 10, 2026</p>
+    </div>
+    <div class="legal-container">
+      <div class="highlight">Chính sách này giải thích cách <strong>Anti-Nuke Bot</strong> thu thập, sử dụng, lưu trữ và bảo vệ dữ liệu của bạn khi sử dụng dịch vụ.</div>
+      <h3><span class="num">1</span> Dữ liệu chúng tôi thu thập</h3>
+      <p>Anti-Nuke Bot có thể thu thập các loại dữ liệu sau để vận hành hệ thống bảo vệ:</p>
+      <ul>
+        <li><strong>ID Server, ID kênh, ID role:</strong> Để cấu hình và vận hành các lá chắn.</li>
+        <li><strong>ID người dùng:</strong> Để xử lý blacklist, phân quyền và ghi log vi phạm.</li>
+        <li><strong>Nội dung tin nhắn:</strong> Chỉ xử lý tạm thời để phát hiện spam, link lừa đảo, từ cấm. <strong>Không lưu trữ lâu dài.</strong></li>
+        <li><strong>Nhật ký kiểm tra (Audit Log):</strong> Để phát hiện hành vi nuke và truy vết kẻ tấn công.</li>
+        <li><strong>Cấu hình server:</strong> Kênh log, kênh honeypot, blacklist, whitelist.</li>
+      </ul>
+      <h3><span class="num">2</span> Mục đích sử dụng dữ liệu</h3>
+      <ul>
+        <li>Phát hiện và ngăn chặn các hành vi phá hoại server (nuke, raid, spam).</li>
+        <li>Ghi log và cảnh báo đến quản trị viên server.</li>
+        <li>Duy trì blacklist toàn hệ thống để bảo vệ cộng đồng.</li>
+        <li>Cải thiện chất lượng dịch vụ và trải nghiệm người dùng.</li>
+      </ul>
+      <div class="highlight success">✅ Chúng tôi <strong>KHÔNG</strong> sử dụng dữ liệu của bạn cho mục đích quảng cáo, tiếp thị hoặc bán cho bên thứ ba.</div>
+      <h3><span class="num">3</span> Chia sẻ dữ liệu với bên thứ ba</h3>
+      <p>Chúng tôi <strong>KHÔNG</strong> bán, cho thuê hoặc chia sẻ dữ liệu của bạn cho bất kỳ bên thứ ba nào, ngoại trừ:</p>
+      <ul>
+        <li>Yêu cầu pháp lý từ cơ quan có thẩm quyền.</li>
+        <li>Bảo vệ quyền lợi hợp pháp của Anti-Nuke Bot và cộng đồng người dùng.</li>
+        <li>Dữ liệu blacklist chia sẻ giữa các server sử dụng Anti-Nuke Bot.</li>
+      </ul>
+      <h3><span class="num">4</span> Bảo mật dữ liệu</h3>
+      <ul>
+        <li>Dữ liệu được lưu trữ trên server bảo mật với mã hóa SSL/TLS.</li>
+        <li>Chỉ đội ngũ phát triển mới có quyền truy cập dữ liệu.</li>
+        <li>Token bot được mã hóa và bảo vệ nghiêm ngặt.</li>
+        <li>Kiểm tra bảo mật định kỳ.</li>
+      </ul>
+      <div class="highlight warning">⚠️ Mặc dù chúng tôi nỗ lực tối đa, không có hệ thống nào an toàn 100%.</div>
+      <h3><span class="num">5</span> Thời gian lưu trữ</h3>
+      <ul>
+        <li><strong>Nhật ký vi phạm:</strong> Tối đa <strong>90 ngày</strong>.</li>
+        <li><strong>Blacklist:</strong> Lưu <strong>vĩnh viễn</strong> cho đến khi gỡ bỏ.</li>
+        <li><strong>Cấu hình server:</strong> Lưu cho đến khi bot bị mời ra khỏi server.</li>
+        <li><strong>Nội dung tin nhắn:</strong> Không lưu trữ sau khi xử lý.</li>
+        <li><strong>Dữ liệu xác minh:</strong> Tối đa <strong>30 ngày</strong>.</li>
+      </ul>
+      <h3><span class="num">6</span> Quyền của bạn</h3>
+      <ul>
+        <li><strong>Quyền truy cập:</strong> Xem dữ liệu bot lưu về bạn.</li>
+        <li><strong>Quyền chỉnh sửa:</strong> Yêu cầu chỉnh sửa dữ liệu sai.</li>
+        <li><strong>Quyền xóa dữ liệu:</strong> Xóa toàn bộ dữ liệu của bạn.</li>
+        <li><strong>Quyền rút khỏi dịch vụ:</strong> Mời bot ra khỏi server sẽ dừng thu thập dữ liệu.</li>
+      </ul>
+      <p>Chúng tôi sẽ phản hồi trong vòng <strong>7 ngày làm việc</strong>.</p>
+      <h3><span class="num">7</span> Trẻ em dưới 13 tuổi</h3>
+      <p>Anti-Nuke Bot không dành cho trẻ em dưới 13 tuổi. Chúng tôi không cố ý thu thập dữ liệu của trẻ em dưới 13 tuổi. Nếu phát hiện, chúng tôi sẽ xóa ngay lập tức.</p>
+      <h3><span class="num">8</span> Cookie và công nghệ theo dõi</h3>
+      <ul>
+        <li><strong>Bot:</strong> Không sử dụng cookie hoặc theo dõi người dùng.</li>
+        <li><strong>Website:</strong> Có thể dùng cookie để cải thiện trải nghiệm.</li>
+        <li><strong>Bên thứ ba:</strong> Discord có chính sách riêng tại discord.com/privacy.</li>
+      </ul>
+      <h3><span class="num">9</span> Thay đổi chính sách</h3>
+      <p>Chúng tôi có thể cập nhật Chính sách Bảo mật bất cứ lúc nào. Thay đổi quan trọng sẽ được thông báo qua kênh cập nhật của bot. Việc tiếp tục sử dụng dịch vụ đồng nghĩa bạn chấp nhận chính sách mới.</p>
+      <h3><span class="num">10</span> Liên hệ</h3>
+      <p>Mọi thắc mắc về Chính sách Bảo mật, vui lòng liên hệ qua server hỗ trợ chính thức của <strong>Anti-Nuke Bot</strong>. Thời gian phản hồi: trong vòng 7 ngày làm việc. Ngôn ngữ hỗ trợ: Tiếng Việt, Tiếng Anh.</p>
+    </div>
+  </div>
+</section>
+
+<section id="terms" class="alt">
+  <div class="container">
+    <div class="section-title">
+      <h2>Điều khoản <span>Dịch vụ</span></h2>
+      <p>Cập nhật lần cuối: 11 tháng 10, 2026</p>
+    </div>
+    <div class="legal-container">
+      <div class="highlight">Bằng việc mời <strong>Anti-Nuke Bot</strong> vào server Discord, bạn đồng ý với các Điều khoản Dịch vụ dưới đây.</div>
+      <h3><span class="num">1</span> Chấp nhận điều khoản</h3>
+      <p>Khi bạn thêm Anti-Nuke Bot vào server hoặc sử dụng bất kỳ lệnh nào, bạn đồng ý tuân thủ toàn bộ Điều khoản Dịch vụ này. Nếu không đồng ý, vui lòng không sử dụng dịch vụ.</p>
+      <h3><span class="num">2</span> Điều kiện sử dụng</h3>
+      <ul>
+        <li>Bạn phải đủ <strong>13 tuổi trở lên</strong> theo quy định của Discord.</li>
+        <li>Tuân thủ Điều khoản Dịch vụ và Chính sách Cộng đồng của Discord.</li>
+        <li>Có quyền quản trị hợp pháp đối với server mà bạn thêm bot.</li>
+        <li>Không sử dụng bot cho mục đích bất hợp pháp, phá hoại hoặc gây hại.</li>
+      </ul>
+      <h3><span class="num">3</span> Hành vi bị cấm</h3>
+      <p>Bạn <strong>KHÔNG ĐƯỢC</strong>:</p>
+      <ul>
+        <li>Reverse engineer, decompile hoặc sao chép mã nguồn của bot.</li>
+        <li>Sử dụng bot để tấn công, phá hoại server khác.</li>
+        <li>Khai thác lỗ hổng bảo mật để lạm dụng dịch vụ.</li>
+        <li>Spam lệnh bot hoặc gây quá tải hệ thống.</li>
+        <li>Dùng bot để phân biệt đối xử, quấy rối hoặc đe dọa người khác.</li>
+        <li>Bán lại, cho thuê hoặc thương mại hóa dịch vụ.</li>
+        <li>Cố tình lách qua các biện pháp bảo vệ của Anti-Nuke Bot.</li>
+      </ul>
+      <div class="highlight warning">⚠️ Vi phạm có thể dẫn đến việc bị <strong>blacklist vĩnh viễn</strong> khỏi hệ thống.</div>
+      <h3><span class="num">4</span> Quyền hạn của Anti-Nuke Bot</h3>
+      <ul>
+        <li>Từ chối phục vụ bất kỳ server hoặc người dùng nào mà không cần báo trước.</li>
+        <li>Rời khỏi server nếu phát hiện hành vi vi phạm.</li>
+        <li>Blacklist vĩnh viễn người dùng hoặc server vi phạm.</li>
+        <li>Thay đổi, tạm ngưng hoặc ngừng cung cấp dịch vụ bất cứ lúc nào.</li>
+        <li>Cập nhật điều khoản mà không cần thông báo trước.</li>
+      </ul>
+      <h3><span class="num">5</span> Trách nhiệm của người dùng</h3>
+      <ul>
+        <li>Bạn chịu trách nhiệm cấu hình bot đúng cách để tránh xử lý nhầm.</li>
+        <li>Bạn chịu trách nhiệm cho mọi hành động của quản trị viên trong server.</li>
+        <li>Bạn phải thông báo cho thành viên server về việc bot có thể xử lý dữ liệu của họ.</li>
+        <li>Không đổ lỗi cho Anti-Nuke Bot nếu bot xử lý nhầm do cấu hình sai.</li>
+      </ul>
+      <h3><span class="num">6</span> Giới hạn trách nhiệm</h3>
+      <p>Anti-Nuke Bot được cung cấp <strong>"nguyên trạng"</strong> và <strong>"có sẵn"</strong>. Chúng tôi không đảm bảo bot sẽ hoạt động không có lỗi 100%, ngăn chặn được mọi cuộc tấn công, hoặc dữ liệu sẽ không bao giờ bị mất.</p>
+      <p>Chúng tôi <strong>KHÔNG CHỊU TRÁCH NHIỆM</strong> cho bất kỳ thiệt hại trực tiếp, gián tiếp, ngẫu nhiên hoặc hậu quả nào phát sinh từ việc sử dụng hoặc không thể sử dụng bot.</p>
+      <h3><span class="num">7</span> Bồi thường</h3>
+      <p>Bạn đồng ý bồi thường và giữ cho Anti-Nuke Bot, đội ngũ phát triển và các bên liên quan không bị tổn hại trước mọi khiếu nại, thiệt hại, nghĩa vụ, chi phí phát sinh từ: vi phạm Điều khoản Dịch vụ, sử dụng bot trái pháp luật, xâm phạm quyền của bên thứ ba.</p>
+      <h3><span class="num">8</span> Chấm dứt dịch vụ</h3>
+      <ul>
+        <li>Bạn có thể chấm dứt dịch vụ bất cứ lúc nào bằng cách kick bot khỏi server.</li>
+        <li>Chúng tôi có thể chấm dứt dịch vụ nếu bạn vi phạm điều khoản.</li>
+        <li>Sau khi chấm dứt, dữ liệu liên quan sẽ được xử lý theo Chính sách Bảo mật.</li>
+      </ul>
+      <h3><span class="num">9</span> Sở hữu trí tuệ</h3>
+      <p>Toàn bộ mã nguồn, logo, tên thương hiệu <strong>"Anti-Nuke Bot"</strong>, thiết kế và nội dung của dịch vụ thuộc quyền sở hữu của đội ngũ phát triển. Bạn không được sao chép, chỉnh sửa, phân phối hoặc sử dụng cho mục đích thương mại mà không có sự cho phép bằng văn bản.</p>
+      <h3><span class="num">10</span> Luật áp dụng</h3>
+      <p>Điều khoản này được điều chỉnh và giải thích theo pháp luật Việt Nam và các quy định của Discord. Mọi tranh chấp sẽ được giải quyết thông qua thương lượng trước khi đưa ra cơ quan có thẩm quyền.</p>
+      <h3><span class="num">11</span> Điều khoản chung</h3>
+      <ul>
+        <li>Nếu bất kỳ điều khoản nào bị vô hiệu, các điều khoản còn lại vẫn có hiệu lực.</li>
+        <li>Việc chúng tôi không thực thi một quyền nào đó không có nghĩa là từ bỏ quyền đó.</li>
+        <li>Điều khoản này là toàn bộ thỏa thuận giữa bạn và Anti-Nuke Bot.</li>
+      </ul>
+      <h3><span class="num">12</span> Liên hệ</h3>
+      <p>Mọi thắc mắc về Điều khoản Dịch vụ, vui lòng liên hệ qua server hỗ trợ chính thức của <strong>Anti-Nuke Bot</strong>. Thời gian phản hồi: trong vòng 7 ngày làm việc.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="#features">Chức năng</a>
+    <a href="#commands">Lệnh</a>
+    <a href="#privacy">Chính sách Bảo mật</a>
+    <a href="#terms">Điều khoản Dịch vụ</a>
+    <a href="https://discord.com/oauth2/authorize?client_id=1557731965686521997" target="_blank" rel="noopener" style="color:#ff4757;font-weight:600;">➕ Mời Bot</a>
+  </div>
+  <p>© 2026 <strong style="color:#ff4757;">Anti-Nuke Bot</strong> — Bảo vệ server Discord của bạn 24/7</p>
+  <p style="margin-top:8px;font-size:13px;opacity:0.7;">Không liên kết chính thức với Discord Inc.</p>
+</footer>
+
+</body>
+                                                                                                      </html>
